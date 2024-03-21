@@ -10,7 +10,12 @@ public struct AxialRotClamp
 
     public void Update(float dt)
     {
-        Current = Mathf.Clamp(Current + dt, Min, Max);
+        Current += dt;
+
+        if (Current > Max)
+            Current = Min;
+        if (Current < Min)
+            Current = Max;
     }
 }
 
@@ -65,7 +70,8 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Start()
     {
-        clampX = new AxialRotClamp() { Min = -180, Max = 180, Current = 0 };
+        Cursor.lockState = CursorLockMode.Confined;
+        clampX = new AxialRotClamp() { Min = -360, Max = 360, Current = 0 };
         clampY = new AxialRotClamp() { Min = -30, Max = 30, Current = 0 };
         offset = new Vector3(0, 2.5f, -5);
         Camera.main.transform.rotation = transform.rotation;
@@ -80,20 +86,22 @@ public class PlayerMovementController : MonoBehaviour
             hovering = false;
         }
 
-        float fwdSpeed = Mathf.Clamp(keyMonitor.heldTime, 0, fwdHoverMomentumMax) * GetFWDStep;
-        float hoverSpeed = Mathf.Clamp(keyMonitor.heldTime, 0, hoverMaxSpeed) * GetHoverStep;
-        Vector3 fwdVec = gameObject.transform.forward.normalized;
 
-        body.velocity = fwdVec * fwdSpeed;
-        Camera.main.transform.position = transform.position;
     }
 
     private void LateUpdate()
     {
         float deltaX = Input.GetAxis("Mouse X") * turnSpeed;
         float deltaY = Input.GetAxis("Mouse Y") * turnSpeed;
+        float fwdSpeed = Mathf.Clamp(keyMonitor.heldTime, 0, fwdHoverMomentumMax) * GetFWDStep;
+        float hoverSpeed = Mathf.Clamp(keyMonitor.heldTime, 0, hoverMaxSpeed) * GetHoverStep;
         clampX.Update(deltaX);
         clampY.Update(-deltaY);
+
+        Vector3 fwdVec = gameObject.transform.forward.normalized;
+
+        body.velocity = new Vector3(0, fwdVec.y * hoverSpeed, fwdVec.z * fwdSpeed);
+        Camera.main.transform.position = transform.position;
 
         gameObject.transform.rotation = Quaternion.identity * Quaternion.Euler(clampY.Current, clampX.Current, 0);
         //transform.RotateAround(transform.position, Vector3.right, deltaY);
