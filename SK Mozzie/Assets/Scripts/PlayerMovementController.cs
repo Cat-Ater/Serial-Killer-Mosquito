@@ -8,7 +8,7 @@ public struct AxialRotClamp
     public float Max { get; set; }
     public float Current { get; set; }
 
-    public void Update(float dt)
+    public void UpdateLooped(float dt)
     {
         Current += dt;
 
@@ -16,6 +16,11 @@ public struct AxialRotClamp
             Current = Min;
         if (Current < Min)
             Current = Max;
+    }
+
+    public void UpdateClamp(float dt)
+    {
+        Current = Mathf.Clamp( Current + dt, Min, Max);
     }
 }
 
@@ -51,7 +56,7 @@ public class PlayerMovementController : MonoBehaviour
 {
     public Rigidbody body;
     public AxialRotClamp clampX;
-    public AxialRotClamp clampY; 
+    public AxialRotClamp clampY;
     public KeyPressMonitor keyMonitor;
     public float turnSpeed = 1.0F;
     public float hoverMaxSpeed;
@@ -59,7 +64,7 @@ public class PlayerMovementController : MonoBehaviour
     public bool hovering = false;
     public Transform player;
     public float xRot = 0;
-    public float yRot = 0; 
+    public float yRot = 0;
 
     private Vector3 offset;
 
@@ -93,19 +98,20 @@ public class PlayerMovementController : MonoBehaviour
     {
         float deltaX = Input.GetAxis("Mouse X") * turnSpeed;
         float deltaY = Input.GetAxis("Mouse Y") * turnSpeed;
+        clampX.UpdateLooped(deltaX);
+        clampY.UpdateClamp(-deltaY);
         float fwdSpeed = Mathf.Clamp(keyMonitor.heldTime, 0, fwdHoverMomentumMax) * GetFWDStep;
         float hoverSpeed = Mathf.Clamp(keyMonitor.heldTime, 0, hoverMaxSpeed) * GetHoverStep;
-        clampX.Update(deltaX);
-        clampY.Update(-deltaY);
 
         Vector3 fwdVec = gameObject.transform.forward.normalized;
 
-        body.velocity = new Vector3(0, fwdVec.y * hoverSpeed, fwdVec.z * fwdSpeed);
-        Camera.main.transform.position = transform.position;
+        if (keyMonitor.active)
+        {
+            body.velocity = new Vector3(0, fwdVec.y * hoverSpeed, fwdVec.z * fwdSpeed);
+            Camera.main.transform.position = transform.position;
+        }
 
         gameObject.transform.rotation = Quaternion.identity * Quaternion.Euler(clampY.Current, clampX.Current, 0);
-        //transform.RotateAround(transform.position, Vector3.right, deltaY);
-        //transform.RotateAround(transform.position, Vector3.up, deltaX);
         Camera.main.transform.rotation = transform.rotation;
     }
 }
