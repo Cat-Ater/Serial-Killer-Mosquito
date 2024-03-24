@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AudioInputController : MonoBehaviour
 {
+    private const float defaultScaleValue = 1000000;
     private bool initalized = false;
 
     public int sampleWindow = 20;
@@ -15,6 +16,9 @@ public class AudioInputController : MonoBehaviour
         get => sampleWindow;
         set => sampleWindow = value; 
     }
+
+    public float threshold = 0.025F;
+    public float outputScaling = 100F; 
 
     public float Average { get; set; }
     public float Peak { get; set; }
@@ -76,9 +80,9 @@ public class AudioInputController : MonoBehaviour
 
     public void MicrophoneToAudioClip()
     {
-        string micName = Microphone.devices[0];
-        microphoneClip = Microphone.Start(micName, true, 20, AudioSettings.outputSampleRate);
-        Debug.Log(micName);
+        device = Microphone.devices[0];
+        microphoneClip = Microphone.Start(device, true, 20, AudioSettings.outputSampleRate);
+        Debug.Log(device);
     }
 
     private float GetPeak(AudioClip clip)
@@ -99,7 +103,7 @@ public class AudioInputController : MonoBehaviour
                 peak = waveData[i] * waveData[i];
         }
 
-        return peak;
+        return OverThreshold(peak, threshold);
     }
 
     private float GetAverage(AudioClip clip)
@@ -119,7 +123,14 @@ public class AudioInputController : MonoBehaviour
             total += Mathf.Abs(waveData[i]);
         }
 
-        return total / sampleWindow;
+        float t = total / sampleWindow;
+
+        return OverThreshold(total / sampleWindow, threshold);
+    }
+
+    private float OverThreshold(float value, float threshold)
+    {
+        return (value < threshold) ? 0 : value * outputScaling;
     }
 
     public static AudioInputController GetInputController()

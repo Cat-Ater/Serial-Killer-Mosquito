@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct AxialRotClamp
+public class AxialRotClamp
 {
+    public float turnSpeed = 6.3F; 
     public float Min { get; set; }
     public float Max { get; set; }
     public float Current { get; set; }
@@ -54,23 +55,16 @@ public class KeyPressMonitor
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementController : MonoBehaviour
 {
-    public Rigidbody body;
     public AxialRotClamp clampX;
     public AxialRotClamp clampY;
+    public Rigidbody body;
     public AudioInputController audioInputController;
-    public float turnSpeed = 1.0F;
     public float hoverMaxSpeed;
     public float fwdHoverMomentumMax = 0.2F;
     public bool hovering = false;
     public Transform player;
-    public float xRot = 0;
-    public float yRot = 0;
 
     public float currentVolume;
-    public float volumeThreshold = 0.025F;
-    public float outputScalar = 100; 
-
-    private bool UpdateMovement => currentVolume >= volumeThreshold;
 
     private void Start()
     {
@@ -86,7 +80,6 @@ public class PlayerMovementController : MonoBehaviour
         clampY = new AxialRotClamp() { Min = -30, Max = 30, Current = 0 };
     }
 
-    int pos = 0;
     private void Update()
     {
         currentVolume = audioInputController.Average;
@@ -94,8 +87,8 @@ public class PlayerMovementController : MonoBehaviour
 
     private void LateUpdate()
     {
-        float deltaX = Input.GetAxis("Mouse X") * turnSpeed;
-        float deltaY = Input.GetAxis("Mouse Y") * turnSpeed;
+        float deltaX = Input.GetAxis("Mouse X") * clampX.turnSpeed;
+        float deltaY = Input.GetAxis("Mouse Y") * clampY.turnSpeed;
         clampX.UpdateLooped(deltaX);
         clampY.UpdateClamp(-deltaY);
         float fwdSpeed = 0;
@@ -104,7 +97,7 @@ public class PlayerMovementController : MonoBehaviour
 
         Vector3 fwdVec = gameObject.transform.forward.normalized;
 
-        body.velocity = new Vector3(0, fwdVec.y * hoverSpeed, fwdVec.z * fwdSpeed);
+        body.velocity = new Vector3(fwdVec.x * fwdSpeed, fwdVec.y * hoverSpeed, fwdVec.z * fwdSpeed);
 
         //Update rotation and camera positions. 
         gameObject.transform.rotation = Quaternion.identity * Quaternion.Euler(clampY.Current, clampX.Current, 0);
@@ -113,11 +106,8 @@ public class PlayerMovementController : MonoBehaviour
 
     private void GetForwardMomentum(ref float fwdSpeed, ref float upwardSpeed)
     {
-        fwdSpeed = currentVolume * outputScalar * fwdHoverMomentumMax * Time.deltaTime;
-        upwardSpeed = currentVolume * outputScalar * hoverMaxSpeed * Time.deltaTime;
-
-        Debug.Log("FWDM: " + fwdSpeed);
-        Debug.Log("UWDM: " + upwardSpeed);
+        fwdSpeed = currentVolume * fwdHoverMomentumMax * Time.deltaTime;
+        upwardSpeed = currentVolume * hoverMaxSpeed * Time.deltaTime;
     }
 
     private void UpdateCamera()
