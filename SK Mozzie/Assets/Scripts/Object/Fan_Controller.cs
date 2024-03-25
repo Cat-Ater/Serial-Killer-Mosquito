@@ -9,6 +9,7 @@ public class Fan_Controller : MonoBehaviour
 {
     public float pushStrength;
     public bool isPushing = false;
+    public int numberOfFrames = 50; 
 
     public void OnTriggerStay(Collider other)
     {
@@ -24,7 +25,7 @@ public class Fan_Controller : MonoBehaviour
         if (other.gameObject.tag == "Player" && !isPushing)
         {
             Rigidbody body = other.GetComponent<Rigidbody>();
-            StartCoroutine(PushEffect(body, pushStrength, 20));
+            StartCoroutine(PushEffect(body, pushStrength, numberOfFrames));
         }
     }
 
