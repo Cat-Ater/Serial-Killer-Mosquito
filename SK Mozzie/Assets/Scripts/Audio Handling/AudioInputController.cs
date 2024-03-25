@@ -2,9 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Limiter
+{
+    public float min = 0.0025F;
+    public float max = 11F;
+
+    public float LimitResult(float value)
+    {
+        return (value > min && value < max) ? value : 0;
+    }
+}
+
 public class AudioInputController : MonoBehaviour
 {
-    private const float defaultScaleValue = 1000000;
     private bool initalized = false;
 
     public int sampleWindow = 20;
@@ -16,9 +27,9 @@ public class AudioInputController : MonoBehaviour
         get => sampleWindow;
         set => sampleWindow = value; 
     }
-
-    public float threshold = 0.025F;
-    public float outputScaling = 100F; 
+    public Limiter detectionLimiter; 
+    public Vector2 remapInitalRange = new Vector2(0F, 0.01F);
+    public Vector2 remapOutputRange = new Vector2(0F, 100F);
 
     public float Average { get; set; }
     public float Peak { get; set; }
@@ -103,7 +114,7 @@ public class AudioInputController : MonoBehaviour
                 peak = waveData[i] * waveData[i];
         }
 
-        return OverThreshold(peak, threshold);
+        return detectionLimiter.LimitResult(peak);
     }
 
     private float GetAverage(AudioClip clip)
@@ -123,20 +134,25 @@ public class AudioInputController : MonoBehaviour
             total += Mathf.Abs(waveData[i]);
         }
 
-        float t = total / sampleWindow;
+        float t = Remap(total / sampleWindow, remapInitalRange, remapOutputRange);
 
-        return OverThreshold(total / sampleWindow, threshold);
-    }
-
-    private float OverThreshold(float value, float threshold)
-    {
-        return (value < threshold) ? 0 : value * outputScaling;
+        return detectionLimiter.LimitResult(t);
     }
 
     public static AudioInputController GetInputController()
     {
         GameObject controller = new GameObject("Audio Input Controller");
         return controller.AddComponent<AudioInputController>();
+    }
+
+    public static float Remap(float value, float from1, float to1, float from2, float to2)
+    {
+        return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+    }
+
+    public static float Remap(float value, Vector2 rangeA, Vector2 rangeB)
+    {
+        return Remap(value, rangeA.x, rangeA.y, rangeB.x, rangeB.y);
     }
 }
 

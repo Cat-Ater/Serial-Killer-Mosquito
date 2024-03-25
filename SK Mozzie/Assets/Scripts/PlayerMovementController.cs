@@ -59,6 +59,8 @@ public class PlayerMovementController : MonoBehaviour
     public AxialRotClamp clampY;
     public Rigidbody body;
     public AudioInputController audioInputController;
+    public float minimumThresholdForFlight = 0.3F; 
+    public float maximumThresholdForFlight = 60F; 
     public float hoverMaxSpeed;
     public float fwdHoverMomentumMax = 0.2F;
     public bool hovering = false;
@@ -87,10 +89,8 @@ public class PlayerMovementController : MonoBehaviour
 
     private void LateUpdate()
     {
-        float deltaX = Input.GetAxis("Mouse X") * clampX.turnSpeed;
-        float deltaY = Input.GetAxis("Mouse Y") * clampY.turnSpeed;
-        clampX.UpdateLooped(deltaX);
-        clampY.UpdateClamp(-deltaY);
+        clampX.UpdateLooped(Input.GetAxis("Mouse X") * clampX.turnSpeed);
+        clampY.UpdateClamp(-Input.GetAxis("Mouse Y") * clampY.turnSpeed);
         float fwdSpeed = 0;
         float hoverSpeed = 0;
         GetForwardMomentum(ref fwdSpeed, ref hoverSpeed);

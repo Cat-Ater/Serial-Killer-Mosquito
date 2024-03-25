@@ -1021,16 +1021,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 1091636179}
   audioInputController: {fileID: 1091636185}
-  turnSpeed: 6.32
-  hoverMaxSpeed: 2
-  fwdHoverMomentumMax: 4
+  minimumThresholdForFlight: 0.002
+  maximumThresholdForFlight: 20
+  hoverMaxSpeed: 100
+  fwdHoverMomentumMax: 300
   hovering: 0
   player: {fileID: 1091636183}
-  xRot: 0
-  yRot: 0
   currentVolume: 0
-  volumeThreshold: 0.025
-  outputScalar: 100
 --- !u!54 &1091636179
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1169,9 +1166,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170d73f2b8332274880e60267fbdce95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sampleWindow: 20
+  sampleWindow: 5
   microphoneClip: {fileID: 0}
   device: 
+  detectionLimiter:
+    min: 0.0025
+    max: 11
+  remapInitalRange: {x: 0, y: 0.01}
+  remapOutputRange: {x: 0, y: 10}
 --- !u!1 &1109824348
 GameObject:
   m_ObjectHideFlags: 0
