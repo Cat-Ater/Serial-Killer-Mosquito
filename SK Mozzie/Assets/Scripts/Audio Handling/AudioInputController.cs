@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class allowing for limits to be defined for audio detection. 
+/// </summary>
 [System.Serializable]
 public class Limiter
 {
@@ -14,6 +17,9 @@ public class Limiter
     }
 }
 
+/// <summary>
+/// Component class used to detect audio input from microphone.
+/// </summary>
 public class AudioInputController : MonoBehaviour
 {
     private AudioClip microphoneClip;
