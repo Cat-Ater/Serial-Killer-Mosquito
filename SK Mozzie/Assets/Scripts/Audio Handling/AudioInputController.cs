@@ -16,21 +16,19 @@ public class Limiter
 
 public class AudioInputController : MonoBehaviour
 {
+    private AudioClip microphoneClip;
+    private Vector2 remapInitalRange = new Vector2(0F, 0.01F);
+    private Vector2 remapOutputRange = new Vector2(0F, 100F);
     private bool initalized = false;
-
-    public int sampleWindow = 20;
-    public AudioClip microphoneClip;
-    public string device;
+    private int sampleWindow = 10;
+    private string device;
+    public Limiter detectionLimiter; 
 
     public int SampleWindow
     {
         get => sampleWindow;
         set => sampleWindow = value; 
     }
-    public Limiter detectionLimiter; 
-    public Vector2 remapInitalRange = new Vector2(0F, 0.01F);
-    public Vector2 remapOutputRange = new Vector2(0F, 100F);
-
     public float Average { get; set; }
     public float Peak { get; set; }
 
@@ -72,9 +70,9 @@ public class AudioInputController : MonoBehaviour
     #region Microphone Handling.
     private void InitMicrophone()
     {
-        if (device == null)
-            device = Microphone.devices[0];
+        device = Microphone.devices[0];
         microphoneClip = Microphone.Start(device, true, 20, AudioSettings.outputSampleRate);
+        Debug.Log(device);
     }
 
     private void StopMicrophone()
@@ -87,13 +85,6 @@ public class AudioInputController : MonoBehaviour
     {
         Peak = GetPeak(microphoneClip);
         Average = GetAverage(microphoneClip);
-    }
-
-    public void MicrophoneToAudioClip()
-    {
-        device = Microphone.devices[0];
-        microphoneClip = Microphone.Start(device, true, 20, AudioSettings.outputSampleRate);
-        Debug.Log(device);
     }
 
     private float GetPeak(AudioClip clip)
@@ -145,12 +136,12 @@ public class AudioInputController : MonoBehaviour
         return controller.AddComponent<AudioInputController>();
     }
 
-    public static float Remap(float value, float from1, float to1, float from2, float to2)
+    private static float Remap(float value, float from1, float to1, float from2, float to2)
     {
         return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
     }
 
-    public static float Remap(float value, Vector2 rangeA, Vector2 rangeB)
+    private static float Remap(float value, Vector2 rangeA, Vector2 rangeB)
     {
         return Remap(value, rangeA.x, rangeA.y, rangeB.x, rangeB.y);
     }

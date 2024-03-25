@@ -59,8 +59,6 @@ public class PlayerMovementController : MonoBehaviour
     public AxialRotClamp clampY;
     public Rigidbody body;
     public AudioInputController audioInputController;
-    public float minimumThresholdForFlight = 0.3F; 
-    public float maximumThresholdForFlight = 60F; 
     public float hoverMaxSpeed;
     public float fwdHoverMomentumMax = 0.2F;
     public bool hovering = false;
@@ -71,7 +69,7 @@ public class PlayerMovementController : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
-        audioInputController.MicrophoneToAudioClip();
+        //audioInputController.MicrophoneToAudioClip();
         Camera.main.transform.rotation = transform.rotation;
         SetUpRotation();
     }
@@ -91,23 +89,37 @@ public class PlayerMovementController : MonoBehaviour
     {
         clampX.UpdateLooped(Input.GetAxis("Mouse X") * clampX.turnSpeed);
         clampY.UpdateClamp(-Input.GetAxis("Mouse Y") * clampY.turnSpeed);
-        float fwdSpeed = 0;
-        float hoverSpeed = 0;
-        GetForwardMomentum(ref fwdSpeed, ref hoverSpeed);
 
-        Vector3 fwdVec = gameObject.transform.forward.normalized;
-
-        body.velocity = new Vector3(fwdVec.x * fwdSpeed, fwdVec.y * hoverSpeed, fwdVec.z * fwdSpeed);
-
-        //Update rotation and camera positions. 
-        gameObject.transform.rotation = Quaternion.identity * Quaternion.Euler(clampY.Current, clampX.Current, 0);
+        UpdateMovement();
+        UpdateRotation();
         UpdateCamera();
+
     }
 
-    private void GetForwardMomentum(ref float fwdSpeed, ref float upwardSpeed)
+    private void UpdateMovement()
     {
-        fwdSpeed = currentVolume * fwdHoverMomentumMax * Time.deltaTime;
-        upwardSpeed = currentVolume * hoverMaxSpeed * Time.deltaTime;
+        float fwdSpeed = fwdHoverMomentumMax * Time.deltaTime;
+        float upwardSpeed = hoverMaxSpeed * Time.deltaTime;
+
+        if(currentVolume > 0)
+        {
+            Vector3 fwdVec = gameObject.transform.forward.normalized;
+            body.velocity = new Vector3(fwdVec.x * fwdSpeed, fwdVec.y * upwardSpeed, fwdVec.z * fwdSpeed);
+        }
+        if (currentVolume <= 0)
+        {
+            Vector3 v = body.velocity / 2;
+            v.x = (v.x < 0) ? 0 : v.x;
+            v.z = (v.z < 0) ? 0 : v.z;
+            body.velocity = v;
+            return;
+        }
+    }
+
+    private void UpdateRotation()
+    {
+        //Update rotation and camera positions. 
+        gameObject.transform.rotation = Quaternion.identity * Quaternion.Euler(clampY.Current, clampX.Current, 0);
     }
 
     private void UpdateCamera()
