@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AxialRotClamp
 {
-    public float turnSpeed = 6.3F; 
+    public float turnSpeed = 6.3F;
     public float Min { get; set; }
     public float Max { get; set; }
     public float Current { get; set; }
@@ -66,6 +66,10 @@ public class PlayerMovementController : MonoBehaviour
 
     public float currentVolume;
 
+#if DEBUG
+    private bool InputActive => (Input.GetKey(KeyCode.Space));
+#endif
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
@@ -100,20 +104,26 @@ public class PlayerMovementController : MonoBehaviour
     {
         float fwdSpeed = fwdHoverMomentumMax * Time.deltaTime;
         float upwardSpeed = hoverMaxSpeed * Time.deltaTime;
+        Vector3 fwdVec = gameObject.transform.forward.normalized;
 
-        if(currentVolume > 0)
-        {
-            Vector3 fwdVec = gameObject.transform.forward.normalized;
+#if DEBUG
+        if (InputActive)
+            currentVolume = 1;
+#endif
+
+        if (currentVolume > 0)
             body.velocity = new Vector3(fwdVec.x * fwdSpeed, fwdVec.y * upwardSpeed, fwdVec.z * fwdSpeed);
-        }
         if (currentVolume <= 0)
-        {
-            Vector3 v = body.velocity / 2;
-            v.x = (v.x < 0) ? 0 : v.x;
-            v.z = (v.z < 0) ? 0 : v.z;
-            body.velocity = v;
-            return;
-        }
+            body.velocity = ReduceVelocity(4);
+
+    }
+
+    private Vector3 ReduceVelocity(int rate)
+    {
+        Vector3 v = body.velocity / rate;
+        v.x = (v.x < 0) ? 0 : v.x;
+        v.z = (v.z < 0) ? 0 : v.z;
+        return v;
     }
 
     private void UpdateRotation()
