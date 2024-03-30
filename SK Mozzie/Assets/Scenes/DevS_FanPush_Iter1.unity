@@ -998,6 +998,7 @@ GameObject:
   - component: {fileID: 886146659}
   - component: {fileID: 886146664}
   - component: {fileID: 886146663}
+  - component: {fileID: 886146665}
   m_Layer: 0
   m_Name: _TempFan
   m_TagString: Untagged
@@ -1127,6 +1128,22 @@ MonoBehaviour:
   pushStrength: 500
   isPushing: 0
   numberOfFrames: 50
+--- !u!114 &886146665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886146658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ddd33eae28b5148a72170d47ccd942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: Roger | Fan
+    sentences:
+    - Watch out for the Fan!
 --- !u!1 &1109824348
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,6 +2186,10 @@ PrefabInstance:
     - target: {fileID: 889763478244876477, guid: d241c4a390322624b95b112d8313b102, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 925335065836743555, guid: d241c4a390322624b95b112d8313b102, type: 3}
+      propertyPath: currentVolume
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3151054870605938808, guid: d241c4a390322624b95b112d8313b102, type: 3}
       propertyPath: m_RootOrder
