@@ -21,7 +21,7 @@ namespace Audio
             gameObject.name = "UIAudioSource:Inactive";
         }
 
-        internal void Update()
+        internal virtual void Update()
         {
             if (!Playing)
                 return;
@@ -34,6 +34,6 @@ namespace Audio
             }
         }
 
-        public abstract void PlayClip(Vector3 position, AudioClip clip);
+        public abstract void PlayClip(Vector3 position, AudioClip clip, SFX_Data data);
     }
 }

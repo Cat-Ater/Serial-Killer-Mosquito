@@ -26,7 +26,7 @@ namespace UI.Audio
             set; 
         }
 
-        public override void PlayClip(Vector3 position, AudioClip clip)
+        public override void PlayClip(Vector3 position, AudioClip clip, SFX_Data data)
         {
             gameObject.transform.position = position;
             PlayClip(clip);
