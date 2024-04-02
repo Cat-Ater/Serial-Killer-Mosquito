@@ -64,5 +64,13 @@ namespace UI.Audio
             }
             return s;
         }
+
+        public override void PlayClip(AudioClip clip, SFX_Data data)
+        {
+        }
+
+        public override void PlayClip(AudioClip clip, Vector3 position, SFX_Data data)
+        {
+        }
     }
 }

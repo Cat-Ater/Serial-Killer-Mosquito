@@ -45,7 +45,7 @@ namespace Audio
 
         internal override void Update()
         {
-            float dist = Vector3.Distance(transform.position + (Vector3)offset, Player);
+            float dist = Vector3.Distance(transform.position, GameManager.Instance.PlayerPosition);
 
             if (dist < data.minDist)
             {

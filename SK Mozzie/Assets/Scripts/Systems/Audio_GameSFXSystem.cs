@@ -23,20 +23,20 @@ namespace Audio
             }
         }
 
-        public override void PlayClip(AudioClip clip)
+        public override void PlayClip(AudioClip clip, SFX_Data data)
         {
             Audio_GameSource gAS = GetInactiveSource();
             gAS.position = base.Position;
             gAS.gameObject.SetActive(true);
-            gAS.PlayClip(clip);
+            gAS.PlayClip(clip, data);
         }
 
-        public override void PlayClip(AudioClip clip, Vector3 position)
+        public override void PlayClip(AudioClip clip, Vector3 position, SFX_Data data)
         {
             Audio_GameSource gAS = GetInactiveSource();
             gAS.position = position;
             gAS.gameObject.SetActive(true);
-            gAS.PlayClip(clip);
+            gAS.PlayClip(clip, data);
         }
 
         private Audio_GameSource GetInactiveSource()
@@ -62,12 +62,13 @@ namespace Audio
             }
             return s;
         }
+
+        public override void PlayClip(AudioClip clip)
+        {
+        }
+
+        public override void PlayClip(AudioClip clip, Vector3 position)
+        {
+        }
     }
-}
-
-
-
-
-namespace Audio
-{
 }

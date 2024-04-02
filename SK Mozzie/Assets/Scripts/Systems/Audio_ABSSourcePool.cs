@@ -15,6 +15,8 @@ namespace Audio
 
         internal abstract void Prepopulate();
         public abstract void PlayClip(AudioClip clip);
+        public abstract void PlayClip(AudioClip clip, SFX_Data data);
         public abstract void PlayClip(AudioClip clip, Vector3 position);
+        public abstract void PlayClip(AudioClip clip, Vector3 position, SFX_Data data);
     }
 }
