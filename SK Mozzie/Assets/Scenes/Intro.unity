@@ -1407,6 +1407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 1168623893}
   dialogueText: {fileID: 158872281}
+  dialogueAudio: {fileID: 8300000, guid: c6e2a1e9c74688f4eb078207e5516728, type: 3}
   animator: {fileID: 1522823682}
 --- !u!4 &855787924
 Transform:
@@ -1728,6 +1729,12 @@ MonoBehaviour:
     - "\rUse your MOUSE to maneuver yourself so you don\u2019t hit yourself into
       an invisible barrier. Those humans call it\u2026 \u201Dglass\u201D or something
       like that?\r"
+  dialogueData:
+    lines: []
+    textOpenSFX: {fileID: 0}
+    textCloseSFX: {fileID: 0}
+    textTypeSFX: {fileID: 0}
+    textSkipSFX: {fileID: 0}
 --- !u!1001 &1063491186
 PrefabInstance:
   m_ObjectHideFlags: 0
