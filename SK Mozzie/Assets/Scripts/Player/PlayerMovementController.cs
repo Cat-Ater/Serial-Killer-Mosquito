@@ -55,10 +55,12 @@ public class KeyPressMonitor
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementController : MonoBehaviour
 {
+    public Camera thirdPerson;
     public AxialRotClamp clampX;
     public AxialRotClamp clampY;
     public Rigidbody body;
     public AudioInputController audioInputController;
+    public Vector3 cameraOffset; 
     public float hoverMaxSpeed;
     public float fwdHoverMomentumMax = 0.2F;
     public bool hovering = false;
@@ -76,12 +78,13 @@ public class PlayerMovementController : MonoBehaviour
         //audioInputController.MicrophoneToAudioClip();
         Camera.main.transform.rotation = transform.rotation;
         SetUpRotation();
+        UpdateCamera();
     }
 
     private void SetUpRotation()
     {
         clampX = new AxialRotClamp() { Min = -360, Max = 360, Current = 0 };
-        clampY = new AxialRotClamp() { Min = -30, Max = 30, Current = 0 };
+        clampY = new AxialRotClamp() { Min = -60, Max = 60, Current = 0 };
     }
 
     private void Update()
@@ -134,7 +137,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void UpdateCamera()
     {
-        Camera.main.transform.position = transform.position;
-        Camera.main.transform.rotation = transform.rotation;
+        //thirdPerson.transform.position = transform.position + cameraOffset;
+        thirdPerson.transform.rotation = transform.rotation;
     }
 }

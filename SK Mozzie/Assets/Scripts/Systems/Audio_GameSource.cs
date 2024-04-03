@@ -45,6 +45,9 @@ namespace Audio
 
         internal override void Update()
         {
+            if (!playing)
+                return;
+
             float dist = Vector3.Distance(transform.position, GameManager.Instance.PlayerPosition);
 
             if (dist < data.minDist)
@@ -59,6 +62,7 @@ namespace Audio
             {
                 source.volume = Mathf.Clamp(1 - ((dist - data.minDist) / (data.maxDist - data.minDist)), data.minVol, data.maxVol);
             }
+            base.Update();
         }
 
         public static Audio_GameSource GetNew()
