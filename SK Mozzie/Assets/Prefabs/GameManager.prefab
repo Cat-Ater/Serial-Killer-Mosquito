@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7719019489871085981
 MonoBehaviour:
@@ -48,6 +48,15 @@ MonoBehaviour:
   player: {fileID: 0}
   _gameSFXSys: {fileID: 2372515753691876594}
   pMovementController: {fileID: 0}
+  cameraData:
+  - camera: {fileID: 0}
+    name: Main
+    active: 1
+  - camera: {fileID: 0}
+    name: Intro
+    active: 0
+  Targets:
+  - {fileID: 0}
 --- !u!114 &2372515753691876594
 MonoBehaviour:
   m_ObjectHideFlags: 0

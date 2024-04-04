@@ -11,8 +11,20 @@ public class PlayerTargetInteractor : MonoBehaviour, IMosquitoAttack
     {
         if(other.gameObject.GetComponent<TargetHealth>() != null && th == null)
         {
+            Debug.Log("Player Attacking Target");
             th = other.gameObject.GetComponent<TargetHealth>();
             th.OnDrainActivate(this);
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.GetComponent<TargetHealth>() != null && th != null)
+        {
+            if(other.gameObject.GetComponent<TargetHealth>() == th)
+            th.OnDrainCancel();
+            th = null;
+            Debug.Log("Player Ceased Attacking Target");
         }
     }
 
