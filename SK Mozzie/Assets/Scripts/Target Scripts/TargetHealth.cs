@@ -10,42 +10,49 @@ public interface IMosquitoAttack
 
 public enum TargetHealthState
 {
-    ALIVE, 
+    ALIVE,
     ATTACKED,
-    DEAD 
+    DEAD
 }
 
 public class TargetHealth : MonoBehaviour
 {
     public IMosquitoAttack attack;
-    public TargetData data;
-    public TargetHealthState state = TargetHealthState.ALIVE; 
+    public TargetHealthState state = TargetHealthState.ALIVE;
 
-    public bool canBeDrained = true;
-
-    private bool IsDrained => data.HealthCurrent <= 0 && state == TargetHealthState.ATTACKED;
-    private bool ContinueDrain => state == TargetHealthState.ATTACKED && !IsDrained;
+    private bool CanActivate => state == TargetHealthState.ALIVE;
 
     public void OnDrainActivate(IMosquitoAttack attack)
     {
-        if (!(state == TargetHealthState.ALIVE && canBeDrained))
-            return;
-
-        state = TargetHealthState.ATTACKED;
-        this.attack = attack;
+        if (CanActivate)
+        {
+            state = TargetHealthState.ATTACKED;
+            this.attack = attack;
+        }
     }
 
-    public void UpdateData()
+    public void OnDrainCancel()
     {
-        if (ContinueDrain)
-        {
-            data.HealthCurrent -= data.RateOfExtraction;
+        if (state == TargetHealthState.DEAD)
+            state = TargetHealthState.ALIVE;
+        this.attack = null;
+        Debug.Log("Drain deactivated!");
+    }
 
-            //Check if drain is completed.
-            if (IsDrained)
-            {
-                state = TargetHealthState.DEAD;
-            }
+    public void UpdateData(ref TargetDataStruct data)
+    {
+        bool isDrained = data.healthCurrent <= 0;
+        bool continueDrain = state == TargetHealthState.ATTACKED && !isDrained;
+
+        if (continueDrain)
+        {
+            data.healthCurrent -= data.rateOfExtraction;
+        }
+
+        //Check if drain is completed.
+        if (isDrained)
+        {
+            state = TargetHealthState.DEAD;
         }
     }
 }

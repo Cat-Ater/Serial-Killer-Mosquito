@@ -1,27 +1,35 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+[System.Serializable]
+public struct TargetDataStruct
+{
+    [SerializeField] public string name;
+    [SerializeField] public int index;
+    [SerializeField] public int healthCurrent;
+    [SerializeField] public int healthMax;
+    [SerializeField] public int rateOfExtraction;
+}
+
+[System.Serializable]
+[RequireComponent(typeof(TargetHealth))]
 public class TargetData : MonoBehaviour
 {
-    TargetHealth tH;
-    [SerializeField] string targetName;
-    [SerializeField] int targetIndex;
-    [SerializeField] int healthCurrent;
-    [SerializeField] int healthMax;
-    [SerializeField] int rateOfExtraction;
+    public TargetHealth targetHealth;
+    public TargetDataStruct tData;
 
-    public string TargetName => targetName;
-    public int Index => Index;
-    public int HealthMax => healthMax;
+    public string TargetName => tData.name;
+    public int Index => tData.index;
+    public int HealthMax => tData.healthMax;
     public int HealthCurrent
     {
-        get => healthCurrent; 
+        get => tData.healthCurrent; 
         set
         {
-            healthCurrent = Mathf.Clamp(value, 0, healthMax);
+            tData.healthCurrent = Mathf.Clamp(tData.healthCurrent + value, 0, HealthMax);
         }
     } 
-    public int RateOfExtraction => rateOfExtraction;
+    public int RateOfExtraction => tData.rateOfExtraction;
     public bool playIdleAnim = true; 
     public bool playAttackAnim = true; 
     public bool playDeathAnim = true;
@@ -29,19 +37,24 @@ public class TargetData : MonoBehaviour
 
     public void OnEnable()
     {
-        tH = gameObject.AddComponent<TargetHealth>();
-        tH.data = this;
+
     }
 
     public void Update()
     {
-        tH.UpdateData();
+        if(targetHealth.state == TargetHealthState.ATTACKED)
+        {
+            targetHealth.UpdateData(ref tData);
+        }
         ResolveTargetState(); 
     }
 
     private void ResolveTargetState()
     {
-        switch (tH.state)
+        if (playDeathAnim)
+            return;
+
+        switch (targetHealth.state)
         {
             case TargetHealthState.ALIVE:
                 Animation_Idle(); 
@@ -57,29 +70,20 @@ public class TargetData : MonoBehaviour
 
     public void Animation_Idle()
     {
-        if(playIdleAnim == false)
-        {
-            playIdleAnim = true;
-            playDeathAnim = playAttackAnim = false; 
-        }
+        playIdleAnim = true;
+        playDeathAnim = playAttackAnim = false;
     }
 
     public void Animation_Attacked()
     {
-        if (playAttackAnim == false)
-        {
-            playAttackAnim = true;
-            playDeathAnim = playIdleAnim = false;
-        }
+        playAttackAnim = true;
+        playDeathAnim = playIdleAnim = false;
     }
 
     public void Animation_Dead()
     {
-        if (playDeathAnim == false)
-        {
-            playDeathAnim = true;
-            playIdleAnim = playIdleAnim = false;
-        }
+        playDeathAnim = true;
+        playAttackAnim = playIdleAnim = false;
     }
 
     public void OnDeathAnimCompleted()
