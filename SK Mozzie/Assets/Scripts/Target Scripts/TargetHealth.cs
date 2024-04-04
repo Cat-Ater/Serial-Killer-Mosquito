@@ -8,43 +8,44 @@ public interface IMosquitoAttack
     public void OnDrainComplete();
 }
 
+public enum TargetHealthState
+{
+    ALIVE, 
+    ATTACKED,
+    DEAD 
+}
+
 public class TargetHealth : MonoBehaviour
 {
     public IMosquitoAttack attack;
-    public int currentHealth;
-    public int minHealth = 0;
-    public int maxHealth = 100;
-    public int drainPerSecond = 1;
-    public bool isDraining = false;
+    public TargetData data;
+    public TargetHealthState state = TargetHealthState.ALIVE; 
+
     public bool canBeDrained = true;
 
-    private bool IsDrained => currentHealth <= 0;  
-
-    void Start()
-    {
-        currentHealth = maxHealth;
-    }
-
-    void Update()
-    {
-        if (isDraining && !IsDrained)
-        {
-            currentHealth -= drainPerSecond;
-
-            if (currentHealth <= 0)
-            {
-                Debug.Log("Draining target completed.");
-                attack.OnDrainComplete();
-            }
-        }
-    }
+    private bool IsDrained => data.HealthCurrent <= 0 && state == TargetHealthState.ATTACKED;
+    private bool ContinueDrain => state == TargetHealthState.ATTACKED && !IsDrained;
 
     public void OnDrainActivate(IMosquitoAttack attack)
     {
-        if (canBeDrained && !isDraining)
+        if (!(state == TargetHealthState.ALIVE && canBeDrained))
+            return;
+
+        state = TargetHealthState.ATTACKED;
+        this.attack = attack;
+    }
+
+    public void UpdateData()
+    {
+        if (ContinueDrain)
         {
-            isDraining = true;
-            this.attack = attack;
+            data.HealthCurrent -= data.RateOfExtraction;
+
+            //Check if drain is completed.
+            if (IsDrained)
+            {
+                state = TargetHealthState.DEAD;
+            }
         }
     }
 }

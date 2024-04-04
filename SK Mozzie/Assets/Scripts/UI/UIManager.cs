@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
 {
     private static UIManager _instance;
     public UI_DialogueDisplay _dialogueManager;
+    public UI_TargetDisplay _targetDisplay; 
     public Audio_UISFXManager _audioManager;  
 
     public static UIManager Instance
@@ -38,6 +39,18 @@ public class UIManager : MonoBehaviour
         else
         {
             DestroyImmediate(this);
+        }
+    }
+
+    public void SetTargetData(TargetData data)
+    {
+        if(_targetDisplay != null)
+        {
+            _targetDisplay.UpdateData(data);
+        }
+        else
+        {
+            Debug.Log(">> UI_Manager: UI_TargetDisplay is not set. ");
         }
     }
 }
