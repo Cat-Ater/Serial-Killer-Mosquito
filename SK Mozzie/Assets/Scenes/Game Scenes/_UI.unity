@@ -191,9 +191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3166e4131c4d64485b723cb459edd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogueManager: {fileID: 0}
-  _targetDisplay: {fileID: 0}
-  _audioManager: {fileID: 0}
+  _dialogueManager: {fileID: 19155370}
+  _targetDisplay: {fileID: 19155373}
+  _audioManager: {fileID: 19155369}
 --- !u!4 &19155372
 Transform:
   m_ObjectHideFlags: 0
