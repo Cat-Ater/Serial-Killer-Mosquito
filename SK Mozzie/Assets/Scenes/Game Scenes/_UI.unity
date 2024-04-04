@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 19155371}
   - component: {fileID: 19155370}
   - component: {fileID: 19155369}
+  - component: {fileID: 19155373}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -191,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueManager: {fileID: 0}
+  _targetDisplay: {fileID: 0}
   _audioManager: {fileID: 0}
 --- !u!4 &19155372
 Transform:
@@ -207,6 +209,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &19155373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19155368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd1c8ee5a49807948b9beb7748948f64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1590888863
 PrefabInstance:
   m_ObjectHideFlags: 0
