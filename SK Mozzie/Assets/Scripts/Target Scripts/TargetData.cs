@@ -24,7 +24,8 @@ public class TargetData : MonoBehaviour
     public int RateOfExtraction => rateOfExtraction;
     public bool playIdleAnim = true; 
     public bool playAttackAnim = true; 
-    public bool playDeathAnim = true; 
+    public bool playDeathAnim = true;
+    public bool deathAnimComplete = false; 
 
     public void OnEnable()
     {

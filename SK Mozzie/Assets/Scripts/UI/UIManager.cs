@@ -42,11 +42,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void SetTargetData(TargetData data)
+    public void SetTargetData(TargetData data, bool idle, bool attacked, bool dead)
     {
         if(_targetDisplay != null)
         {
-            _targetDisplay.UpdateData(data);
+            _targetDisplay.UpdateData(data, idle, attacked, dead);
         }
         else
         {
