@@ -28,14 +28,14 @@ public class GameManager : MonoBehaviour
 {
     public const string UI_SCENE_NAME = "_UI";
     static GameManager _instance;
-    public GameObject player;
+    public PlayerController playerC; 
     public Audio_GameSFXSystem _gameSFXSys;
     public PlayerMovementController pMovementController;
     public CameraData[] cameraData;
     public List<TargetData> Targets; 
 
-    public Vector3 PlayerPosition { get => player.transform.position; }
     public static GameManager Instance => _instance;
+    public Vector3 PlayerPosition { get => playerC.Position; }
 
     public void OnEnable()
     {

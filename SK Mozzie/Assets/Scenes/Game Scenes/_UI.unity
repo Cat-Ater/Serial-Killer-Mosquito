@@ -156,7 +156,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prepopulationCount: 5
-  sources: []
 --- !u!114 &19155370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &86514749
 AudioListener:
   m_ObjectHideFlags: 0
