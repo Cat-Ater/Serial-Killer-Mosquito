@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Game Scenes/Base_Scene_LanscapeDev.unity
+    guid: 215c0bfc88ea23d4d9c2bfdf790fe34d
+  - enabled: 1
     path: Assets/Scenes/StartingScreen.unity
     guid: c52c720c67b330242ac7661c046beb32
   - enabled: 1
