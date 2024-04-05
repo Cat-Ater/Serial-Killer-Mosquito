@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance => _instance;
     public Vector3 PlayerPosition { get => playerC.Position; }
+    public PlayerState DisablePlayer { set => Instance.playerC.SetPlayerState = value; }
 
     public void OnEnable()
     {
@@ -57,8 +58,6 @@ public class GameManager : MonoBehaviour
             volumeSFX = 50,
             volumeNarration = 50
         };
-
-
     }
 
     public void PlaySoundAt(Vector3 position, AudioClip clip, SFX_Data data)
@@ -78,7 +77,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            UIManager.Instance.PauseMenuToggle();
+        }
     }
 
     public void SwitchCamera(string name)
