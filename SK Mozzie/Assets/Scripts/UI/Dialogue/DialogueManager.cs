@@ -7,6 +7,8 @@ public class DialogueManager : MonoBehaviour {
 
 	public TextMeshProUGUI nameText;
 	public TextMeshProUGUI dialogueText;
+        public AudioClip dialogueAudio;
+        private AudioSource audioSource;
 
 	public Animator animator;
 
@@ -15,10 +17,16 @@ public class DialogueManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		sentences = new Queue<string>();
+
 	}
 
 	public void StartDialogue (Dialogue dialogue)
 	{
+                audioSource = GetComponent<AudioSource>();
+                audioSource.clip = dialogueAudio;
+                audioSource.loop = true;
+                audioSource.Play();
+
 		animator.SetBool("IsOpen", true);
 
 		nameText.text = dialogue.name;
@@ -59,6 +67,7 @@ public class DialogueManager : MonoBehaviour {
 	void EndDialogue()
 	{
 		animator.SetBool("IsOpen", false);
+                audioSource.Stop();
 	}
 
 }
