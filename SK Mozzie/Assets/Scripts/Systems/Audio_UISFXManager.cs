@@ -9,7 +9,10 @@ namespace UI.Audio
     /// </summary>
     public class Audio_UISFXManager : Audio_ABSSourcePool
     {
-        public List<Audio_UISource> sources;
+        /// <summary>
+        /// The current sources held by the manager.
+        /// </summary>
+        internal List<Audio_UISource> sources;
 
         internal override void OnEnable()
         {
@@ -17,6 +20,9 @@ namespace UI.Audio
             base.OnEnable(); 
         }
 
+        /// <summary>
+        /// Prepopulates the sources in the manager. 
+        /// </summary>
         internal override void Prepopulate()
         {
             for (int i = 0; i < base.prepopulationCount; i++)
@@ -25,6 +31,10 @@ namespace UI.Audio
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clip"></param>
         public override void PlayClip(AudioClip clip)
         {
             Audio_UISource uiAS = GetInactiveSource();
