@@ -1119,7 +1119,7 @@ PrefabInstance:
     - target: {fileID: 3966803546564288585, guid: 477cbc6f60c61834dbef9877ddacb5eb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6332481987220923832}
+      objectReference: {fileID: 6332481987220923840}
     - target: {fileID: 3966803546564288585, guid: 477cbc6f60c61834dbef9877ddacb5eb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadMainScene
@@ -1239,7 +1239,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3112266394609053526, guid: 477cbc6f60c61834dbef9877ddacb5eb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6332481987220923832}
+      addedObject: {fileID: 6332481987220923840}
   m_SourcePrefab: {fileID: 100100000, guid: 477cbc6f60c61834dbef9877ddacb5eb, type: 3}
 --- !u!224 &6332481987220923828 stripped
 RectTransform:
@@ -1267,7 +1267,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3112266394609053526, guid: 477cbc6f60c61834dbef9877ddacb5eb, type: 3}
   m_PrefabInstance: {fileID: 6332481987220923827}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6332481987220923832
+--- !u!114 &6332481987220923840
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
