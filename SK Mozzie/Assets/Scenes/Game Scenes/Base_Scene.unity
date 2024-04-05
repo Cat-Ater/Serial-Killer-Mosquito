@@ -317,7 +317,7 @@ PrefabInstance:
     - target: {fileID: 8628252491890666512, guid: 5ef90f917bd95e24c94cd790a89616ea, type: 3}
       propertyPath: dialogueData.textTypeSFX
       value: 
-      objectReference: {fileID: 8300000, guid: 0feef00a8347c984589a07bb9c1e71db, type: 3}
+      objectReference: {fileID: 8300000, guid: 94fe814ba0cf4574fb5a065ad5851b5f, type: 3}
     - target: {fileID: 8628252491890666512, guid: 5ef90f917bd95e24c94cd790a89616ea, type: 3}
       propertyPath: dialogueData.textCloseSFX
       value: 
