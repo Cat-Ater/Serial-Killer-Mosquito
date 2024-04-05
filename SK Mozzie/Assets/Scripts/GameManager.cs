@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
     static GameManager _instance;
     public PlayerController playerC; 
     public Audio_GameSFXSystem _gameSFXSys;
-    public PlayerMovementController pMovementController;
     public CameraData[] cameraData;
     public List<TargetData> Targets; 
 
