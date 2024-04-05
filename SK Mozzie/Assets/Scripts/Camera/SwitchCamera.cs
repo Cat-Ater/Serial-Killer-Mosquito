@@ -10,7 +10,6 @@ public class SwitchCamera : MonoBehaviour
     // Call this function to disable FPS camera,
     // and enable overhead camera.
     public void ShowOverheadView()
-
      
     {
         firstPersonCamera.enabled = false;
