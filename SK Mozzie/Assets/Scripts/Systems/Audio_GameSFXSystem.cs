@@ -7,6 +7,9 @@ namespace Audio
 {
     public class Audio_GameSFXSystem : Audio_ABSSourcePool
     {
+        /// <summary>
+        /// The current sources held by the manager.
+        /// </summary>
         public List<Audio_GameSource> sources;
 
         internal override void OnEnable()
@@ -15,6 +18,9 @@ namespace Audio
             base.OnEnable();
         }
 
+        /// <summary>
+        /// Prepopulates the sources in the manager. 
+        /// </summary>
         internal override void Prepopulate()
         {
             for (int i = 0; i < base.prepopulationCount; i++)
@@ -23,6 +29,11 @@ namespace Audio
             }
         }
 
+        /// <summary>
+        /// Play an audio clip. 
+        /// </summary>
+        /// <param name="clip"> The audio clip to play. </param>
+        /// <param name="data"> The data defining the bounds of the audio clip's volume. </param>
         public override void PlayClip(AudioClip clip, SFX_Data data)
         {
             Audio_GameSource gAS = GetInactiveSource();
@@ -31,6 +42,12 @@ namespace Audio
             gAS.PlayClip(clip, data);
         }
 
+        /// <summary>
+        /// Play an audio clip at a set position. 
+        /// </summary>
+        /// <param name="clip"> The clip to play. </param>
+        /// <param name="position"> The position to play the clip at. </param>
+        /// <param name="data"> The data defining the bounds of the audio clip's volume. </param>
         public override void PlayClip(AudioClip clip, Vector3 position, SFX_Data data)
         {
             Audio_GameSource gAS = GetInactiveSource();
@@ -39,6 +56,9 @@ namespace Audio
             gAS.PlayClip(clip, data);
         }
 
+        /// <summary>
+        /// Returns an inactive source. 
+        /// </summary>
         private Audio_GameSource GetInactiveSource()
         {
             Audio_GameSource s = null;
