@@ -27,6 +27,7 @@ public class CameraData
 public class GameManager : MonoBehaviour
 {
     public const string UI_SCENE_NAME = "_UI";
+    private GameSettingsData gameSettingsData; 
     static GameManager _instance;
     public PlayerController playerC; 
     public Audio_GameSFXSystem _gameSFXSys;
@@ -47,7 +48,17 @@ public class GameManager : MonoBehaviour
         {
             DestroyImmediate(this.gameObject);
         }
-        LoadUI();
+
+        //Generate game settings data. 
+
+        gameSettingsData = new GameSettingsData()
+        {
+            volumeBGM = 50,
+            volumeSFX = 50,
+            volumeNarration = 50
+        };
+
+
     }
 
     public void PlaySoundAt(Vector3 position, AudioClip clip, SFX_Data data)
@@ -89,5 +100,15 @@ public class GameManager : MonoBehaviour
     public void SetNextTarget()
     {
 
+    }
+
+    public void LoadLevel(string name)
+    {
+
+        SceneManager.LoadScene(name);
+        if(name == "Main_Scene")
+        {
+            LoadUI();
+        }
     }
 }
