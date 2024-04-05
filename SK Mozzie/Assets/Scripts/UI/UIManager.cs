@@ -12,7 +12,8 @@ public class UIManager : MonoBehaviour
     private static UIManager _instance;
     public UI_DialogueDisplay _dialogueManager;
     public UI_TargetDisplay _targetDisplay; 
-    public Audio_UISFXManager _audioManager;  
+    public Audio_UISFXManager _audioManager;
+    public PauseMenuController _pauseMenuController; 
 
     public static UIManager Instance
     {
@@ -40,6 +41,11 @@ public class UIManager : MonoBehaviour
         {
             DestroyImmediate(this);
         }
+    }
+
+    public void PauseMenuToggle()
+    {
+        _pauseMenuController.TooggleState();
     }
 
     public void SetTargetData(TargetData data, bool idle, bool attacked, bool dead)
