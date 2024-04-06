@@ -297,11 +297,12 @@ MonoBehaviour:
     index: 0
     healthCurrent: 1000
     healthMax: 1000
-    rateOfExtraction: 1
+    rateOfExtraction: 30
   playIdleAnim: 1
   playAttackAnim: 1
   playDeathAnim: 1
   deathAnimComplete: 0
+  timeTillDead: 33.333332
 --- !u!114 &290682493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,8 +316,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  currentVisScale: 0
-  timeScale: 6
+  vIntensity:
+    maxValue: 100
+    timeTotal: 0
+    timeScale: 25
+  vSmoothing:
+    maxValue: 100
+    timeTotal: 0
+    timeScale: 25
+  fgIntensity:
+    maxValue: 80
+    timeTotal: 0
+    timeScale: 30
+  fgResponse:
+    maxValue: 80
+    timeTotal: 0
+    timeScale: 30
+  timeToKill: 0
 --- !u!65 &290682494
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -578,6 +594,7 @@ MonoBehaviour:
   volume: {fileID: 1272876848}
   vign: {fileID: 0}
   fg: {fileID: 0}
+  currentVIntensity: 0
   attack_Red: {r: 1, g: 0, b: 0, a: 1}
   escape_White: {r: 1, g: 1, b: 1, a: 1}
   failure_Black: {r: 0, g: 0, b: 0, a: 1}

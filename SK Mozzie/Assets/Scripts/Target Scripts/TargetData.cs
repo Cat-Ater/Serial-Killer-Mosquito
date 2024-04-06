@@ -6,9 +6,9 @@ public struct TargetDataStruct
 {
     [SerializeField] public string name;
     [SerializeField] public int index;
-    [SerializeField] public int healthCurrent;
-    [SerializeField] public int healthMax;
-    [SerializeField] public int rateOfExtraction;
+    [SerializeField] public float healthCurrent;
+    [SerializeField] public float healthMax;
+    [SerializeField] public float rateOfExtraction;
 }
 
 [System.Serializable]
@@ -20,8 +20,8 @@ public class TargetData : MonoBehaviour
 
     public string TargetName => tData.name;
     public int Index => tData.index;
-    public int HealthMax => tData.healthMax;
-    public int HealthCurrent
+    public float HealthMax => tData.healthMax;
+    public float HealthCurrent
     {
         get => tData.healthCurrent; 
         set
@@ -29,11 +29,17 @@ public class TargetData : MonoBehaviour
             tData.healthCurrent = Mathf.Clamp(tData.healthCurrent + value, 0, HealthMax);
         }
     } 
-    public int RateOfExtraction => tData.rateOfExtraction;
+    public float RateOfExtraction => tData.rateOfExtraction;
     public bool playIdleAnim = true; 
     public bool playAttackAnim = true; 
     public bool playDeathAnim = true;
-    public bool deathAnimComplete = false; 
+    public bool deathAnimComplete = false;
+    public float timeTillDead;
+
+    public void OnValidate()
+    {
+        timeTillDead = (tData.healthMax / RateOfExtraction);    
+    }
 
     public void OnEnable()
     {

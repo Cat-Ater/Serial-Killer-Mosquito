@@ -77,8 +77,8 @@ namespace UI
     {
         string targetName; // The name of the target. 
         int targetIndex; // The index of the target (Imagine this as the target number in a list). 
-        int currentHealth; // The current health of the player. 
-        int healthMax; //The maximum health of the player.
+        float currentHealth; // The current health of the player. 
+        float healthMax; //The maximum health of the player.
 
         public GameObject rootObject;
         public UIElement nameOutput;

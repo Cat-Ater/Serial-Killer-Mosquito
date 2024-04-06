@@ -46,7 +46,7 @@ public class TargetHealth : MonoBehaviour
             this.attack = attack;
         }
     }
-
+    public float timeToKill = 0;
     public void OnDrainCancel()
     {
         if (state != TargetHealthState.DEAD)
@@ -83,7 +83,8 @@ public class TargetHealth : MonoBehaviour
 
         if (continueDrain)
         {
-            data.healthCurrent -= data.rateOfExtraction;
+            data.healthCurrent -= data.rateOfExtraction * Time.deltaTime;
+            timeToKill += Time.deltaTime;
         }
 
         //Check if drain is completed.
