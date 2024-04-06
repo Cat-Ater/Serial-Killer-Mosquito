@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     static GameManager _instance;
     public PlayerController playerC; 
     public Audio_GameSFXSystem _gameSFXSys;
+    public AttackVisualisation attackVisualisation;
     public CameraData[] cameraData;
     public List<TargetData> Targets; 
 
