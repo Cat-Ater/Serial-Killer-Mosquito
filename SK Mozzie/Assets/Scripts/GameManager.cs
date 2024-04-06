@@ -27,15 +27,18 @@ public class CameraData
 public class GameManager : MonoBehaviour
 {
     public const string UI_SCENE_NAME = "_UI";
+    private GameSettingsData gameSettingsData; 
     static GameManager _instance;
-    public GameObject player;
+    public PlayerController playerC; 
     public Audio_GameSFXSystem _gameSFXSys;
-    public PlayerMovementController pMovementController;
+    [HideInInspector] public AttackVisualisation attackVisualisation;
     public CameraData[] cameraData;
     public List<TargetData> Targets; 
 
-    public Vector3 PlayerPosition { get => player.transform.position; }
     public static GameManager Instance => _instance;
+    public Vector3 PlayerPosition { get => playerC.Position; }
+    public PlayerState DisablePlayer { set => Instance.playerC.SetPlayerState = value; }
+    public string KillTagLine { set => UIManager.Instance.SetTargetKillLine = value; }
 
     public void OnEnable()
     {
@@ -48,7 +51,15 @@ public class GameManager : MonoBehaviour
         {
             DestroyImmediate(this.gameObject);
         }
-        LoadUI();
+
+        //Generate game settings data. 
+
+        gameSettingsData = new GameSettingsData()
+        {
+            volumeBGM = 50,
+            volumeSFX = 50,
+            volumeNarration = 50
+        };
     }
 
     public void PlaySoundAt(Vector3 position, AudioClip clip, SFX_Data data)
@@ -68,7 +79,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            UIManager.Instance.PauseMenuToggle();
+        }
     }
 
     public void SwitchCamera(string name)
@@ -90,5 +104,15 @@ public class GameManager : MonoBehaviour
     public void SetNextTarget()
     {
 
+    }
+
+    public void LoadLevel(string name)
+    {
+
+        SceneManager.LoadScene(name);
+        if(name == "Main_Scene")
+        {
+            LoadUI();
+        }
     }
 }

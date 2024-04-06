@@ -32,9 +32,9 @@ namespace UI.Audio
         }
 
         /// <summary>
-        /// 
+        /// Play an audio clip. 
         /// </summary>
-        /// <param name="clip"></param>
+        /// <param name="clip"> The audio clip to play. </param>
         public override void PlayClip(AudioClip clip)
         {
             Audio_UISource uiAS = GetInactiveSource();
@@ -43,6 +43,11 @@ namespace UI.Audio
             uiAS.PlayClip(clip);
         }
 
+        /// <summary>
+        /// Play an audio clip at a set position. 
+        /// </summary>
+        /// <param name="clip"> The clip to play. </param>
+        /// <param name="position"> The position to play the clip at. </param>
         public override void PlayClip(AudioClip clip, Vector3 position)
         {
             Audio_UISource uiAS = GetInactiveSource();
@@ -51,6 +56,9 @@ namespace UI.Audio
             uiAS.PlayClip(clip);
         }
 
+        /// <summary>
+        /// Returns an inactive source. 
+        /// </summary>
         private Audio_UISource GetInactiveSource()
         {
             Audio_UISource s = null;

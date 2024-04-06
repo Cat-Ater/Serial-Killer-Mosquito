@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -65,7 +66,6 @@ public class PlayerMovementController : MonoBehaviour
     public float fwdHoverMomentumMax = 0.2F;
     public bool hovering = false;
     public Transform player;
-
     public float currentVolume;
 
 #if DEBUG
@@ -87,12 +87,7 @@ public class PlayerMovementController : MonoBehaviour
         clampY = new AxialRotClamp() { Min = -60, Max = 60, Current = 0 };
     }
 
-    private void Update()
-    {
-        currentVolume = audioInputController.Average;
-    }
-
-    private void LateUpdate()
+    public void LUpdate()
     {
         clampX.UpdateLooped(Input.GetAxis("Mouse X") * clampX.turnSpeed);
         clampY.UpdateClamp(-Input.GetAxis("Mouse Y") * clampY.turnSpeed);
@@ -101,6 +96,11 @@ public class PlayerMovementController : MonoBehaviour
         UpdateRotation();
         UpdateCamera();
 
+    }
+
+    internal void UpdateVolume()
+    {
+        currentVolume = audioInputController.Average;
     }
 
     private void UpdateMovement()
@@ -139,5 +139,10 @@ public class PlayerMovementController : MonoBehaviour
     {
         //thirdPerson.transform.position = transform.position + cameraOffset;
         thirdPerson.transform.rotation = transform.rotation;
+    }
+
+    internal void CancelMovement()
+    {
+        body.velocity = Vector3.zero; 
     }
 }

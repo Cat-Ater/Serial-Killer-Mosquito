@@ -15,10 +15,26 @@ public enum TargetHealthState
     DEAD
 }
 
+[System.Serializable]
+public class PostProssScaling
+{
+    [Range(0, 100)]
+    public float maxValue;
+    [HideInInspector] public float timeTotal;
+    public float timeScale;
+
+    public float Speed => maxValue / timeScale;
+    public float Value => Mathf.Clamp(timeTotal * Speed, 0, maxValue);
+}
+
 public class TargetHealth : MonoBehaviour
 {
     public IMosquitoAttack attack;
     public TargetHealthState state = TargetHealthState.ALIVE;
+    public PostProssScaling vIntensity;
+    public PostProssScaling vSmoothing;
+    public PostProssScaling fgIntensity;
+    public PostProssScaling fgResponse;
 
     private bool CanActivate => state == TargetHealthState.ALIVE;
 
@@ -30,29 +46,59 @@ public class TargetHealth : MonoBehaviour
             this.attack = attack;
         }
     }
-
+    public float timeToKill = 0;
     public void OnDrainCancel()
     {
-        if (state == TargetHealthState.DEAD)
+        if (state != TargetHealthState.DEAD)
             state = TargetHealthState.ALIVE;
         this.attack = null;
-        Debug.Log("Drain deactivated!");
+
+        //Update the shader. 
+        ClearShaderEffects();
+
     }
 
     public void UpdateData(ref TargetDataStruct data)
     {
         bool isDrained = data.healthCurrent <= 0;
+
         bool continueDrain = state == TargetHealthState.ATTACKED && !isDrained;
+
+        //Update timings. 
+        vIntensity.timeTotal += Time.deltaTime;
+        fgIntensity.timeTotal += Time.deltaTime;
+        vSmoothing.timeTotal += Time.deltaTime;
+        fgResponse.timeTotal += Time.deltaTime;
+
+        //Update the shader. 
+        GameManager.Instance.attackVisualisation.VignetteIntensity = vIntensity.Value;
+        GameManager.Instance.attackVisualisation.FilmGrainIntensity = fgIntensity.Value;
+        GameManager.Instance.attackVisualisation.VignetteSmoothness = vSmoothing.Value;
+        GameManager.Instance.attackVisualisation.FilmGrainResponse = fgResponse.Value;
+        GameManager.Instance.attackVisualisation.SetPostProcessingSettings();
+
 
         if (continueDrain)
         {
-            data.healthCurrent -= data.rateOfExtraction;
+            data.healthCurrent -= data.rateOfExtraction * Time.deltaTime;
+            timeToKill += Time.deltaTime;
         }
 
         //Check if drain is completed.
         if (isDrained)
         {
             state = TargetHealthState.DEAD;
+            ClearShaderEffects();
+            GameManager.Instance.KillTagLine = data.killCompletionLine;
         }
+    }
+
+    private void ClearShaderEffects()
+    {
+        GameManager.Instance.attackVisualisation.VignetteIntensity = 0;
+        GameManager.Instance.attackVisualisation.FilmGrainIntensity = 0;
+        GameManager.Instance.attackVisualisation.VignetteSmoothness = 0;
+        GameManager.Instance.attackVisualisation.FilmGrainResponse = 0;
+        GameManager.Instance.attackVisualisation.SetPostProcessingSettings();
     }
 }
