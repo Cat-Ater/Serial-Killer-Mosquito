@@ -19,19 +19,30 @@ public class AttackVisualisation : MonoBehaviour
     public Volume volume;
     public Vignette vign;
     public FilmGrain fg;
+    public float currentVIntensity = 0;
 
     public Color attack_Red;
     public Color escape_White;
     public Color failure_Black;
 
-    private float VignetteIntensity
+    public float VignetteIntensity
     {
-        set { vign.intensity = new ClampedFloatParameter(Remap(value, internalRange, remapRange), 0, 1, true); }
+        set
+        {
+            Debug.Log("Vig Intensity:" + value);
+            Debug.Log("Vig Intensity Remap:" + Remap(value, remapRange, internalRange));
+            vign.intensity.Override(Remap(value, remapRange, internalRange));
+        }
     }
 
-    private float VignetteSmoothness
+    public float VignetteSmoothness
     {
-        set { vign.smoothness = new ClampedFloatParameter(Remap(value, internalRange, remapRange), 0, 1, true); }
+        set
+        {
+            Debug.Log("Vig Smoothness:" + value);
+            Debug.Log("Vig Smoothness Remap:" + Remap(value, remapRange, internalRange));
+            vign.smoothness.Override(Remap(value, remapRange, internalRange));
+        }
     }
 
     private Color SetVigColor
@@ -42,74 +53,54 @@ public class AttackVisualisation : MonoBehaviour
         }
     }
 
-    private float VignetteAttackAlpha
+    public float FilmGrainIntensity
     {
         set
         {
-            Color c = attack_Red;
-            c.a = value;
-            SetVigColor = c;
+            Debug.Log("FG Intensity:" + value);
+            Debug.Log("FG Intensity Remap:" + Remap(value, remapRange, internalRange));
+            fg.intensity.Override(Remap(value, remapRange, internalRange));
         }
     }
 
-    private float VignetteEscapeAlpha
+    public float FilmGrainResponse
     {
         set
         {
-            Color c = escape_White;
-            c.a = value;
-            SetVigColor = c;
+            Debug.Log("FG Intensity:" + value);
+            Debug.Log("FG Intensity Remap:" + Remap(value, remapRange, internalRange));
+            fg.response.Override(Remap(value, remapRange, internalRange));
         }
-    }
-
-    private float VignetteFailureColor
-    {
-        set
-        {
-            Color c = failure_Black;
-            c.a = value;
-            SetVigColor = c;
-        }
-    }
-
-    private float FilmGrainIntensity
-    {
-        set => fg.intensity = new ClampedFloatParameter(Remap(value, internalRange, remapRange), 0, 1, true);
-    }
-
-    private float FilmGrainResponse
-    {
-        set => fg.response = new ClampedFloatParameter(Remap(value, internalRange, remapRange), 0, 1, true);
     }
 
     void Start()
     {
+        GameManager.Instance.attackVisualisation = this;
         GetPostProcessingSettings();
-        SetAttackState(ColorType.ATTACK, 0, 0, 0, 0, 0);
+        SetVigColor = attack_Red;
+        FilmGrainResponse = 0;
+        FilmGrainIntensity = 0;
+        VignetteIntensity = 0;
+        VignetteSmoothness = 0; 
+
     }
 
-    public void SetAttackState(ColorType colorType, float intensityVig, float smoothnessVig, float intensityFilmGrain, float responseFilmGrain, float alpha)
+    private void SetColor(ColorType type)
     {
-        Debug.Log("Attack call detected");
-        VignetteSmoothness = smoothnessVig;
-        VignetteIntensity = intensityVig;
-        switch (colorType)
+        switch (type)
         {
             case ColorType.ESCAPE:
-                VignetteEscapeAlpha = alpha;
+                SetVigColor = escape_White;
                 break;
             case ColorType.ATTACK:
-                VignetteAttackAlpha = alpha;
+                SetVigColor = attack_Red;
                 break;
             case ColorType.FAILURE:
-                VignetteFailureColor = alpha;
+                SetVigColor = failure_Black;
                 break;
             default:
                 break;
         }
-        FilmGrainIntensity = intensityFilmGrain;
-        FilmGrainResponse = responseFilmGrain;
-        SetPostProcessingSettings();
     }
 
     private void GetPostProcessingSettings()
@@ -128,7 +119,7 @@ public class AttackVisualisation : MonoBehaviour
         }
     }
 
-    private void SetPostProcessingSettings()
+    public void SetPostProcessingSettings()
     {
         for (int i = 0; i < volume.profile.components.Count; i++)
         {
@@ -146,6 +137,6 @@ public class AttackVisualisation : MonoBehaviour
 
     public static float Remap(float value, Vector2 from, Vector2 to)
     {
-        return math.remap(value, from.x, from.y, to.x, to.y);
+        return math.remap(from.x, from.y, to.x, to.y, value);
     }
 }
