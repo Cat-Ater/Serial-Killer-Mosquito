@@ -7,9 +7,14 @@ public class UI_Display_TargetKill : MonoBehaviour
 {
     public GameObject rootObject;
     public TextMeshProUGUI textBox; 
-
-    public void DisplayKillNotification(string text)
+    public string SetText
     {
+        set { DisplayKillNotification(value); }
+    }
+
+    private void DisplayKillNotification(string text)
+    {
+        Debug.Log(text);
         textBox.text = text;
         rootObject.SetActive(true);
         StartCoroutine(DisplayTimer());

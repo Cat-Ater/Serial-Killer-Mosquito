@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0ba8bd51e926e4782a266e4fe9ce8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  playerC: {fileID: 0}
   _gameSFXSys: {fileID: 2372515753691876594}
-  pMovementController: {fileID: 0}
+  attackVisualisation: {fileID: 0}
   cameraData:
   - camera: {fileID: 0}
     name: Main

@@ -89,7 +89,7 @@ public class TargetHealth : MonoBehaviour
         {
             state = TargetHealthState.DEAD;
             ClearShaderEffects();
-            GameManager.Instance.SetTargetAssasinatedPhrase(data.killCompletionLine);
+            GameManager.Instance.KillTagLine = data.killCompletionLine;
         }
     }
 
