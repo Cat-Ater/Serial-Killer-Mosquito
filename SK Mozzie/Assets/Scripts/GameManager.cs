@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     static GameManager _instance;
     public PlayerController playerC; 
     public Audio_GameSFXSystem _gameSFXSys;
-    public AttackVisualisation attackVisualisation;
+    [HideInInspector] public AttackVisualisation attackVisualisation;
     public CameraData[] cameraData;
     public List<TargetData> Targets; 
 
@@ -114,4 +114,7 @@ public class GameManager : MonoBehaviour
             LoadUI();
         }
     }
+
+    public void SetTargetAssasinatedPhrase(string text) => 
+        UIManager.Instance.SetTargetKillLine = text; 
 }

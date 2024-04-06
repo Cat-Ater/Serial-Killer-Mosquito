@@ -9,6 +9,7 @@ public struct TargetDataStruct
     [SerializeField] public float healthCurrent;
     [SerializeField] public float healthMax;
     [SerializeField] public float rateOfExtraction;
+    [SerializeField] public string killCompletionLine;
 }
 
 [System.Serializable]

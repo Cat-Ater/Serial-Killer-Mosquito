@@ -27,22 +27,12 @@ public class AttackVisualisation : MonoBehaviour
 
     public float VignetteIntensity
     {
-        set
-        {
-            Debug.Log("Vig Intensity:" + value);
-            Debug.Log("Vig Intensity Remap:" + Remap(value, remapRange, internalRange));
-            vign.intensity.Override(Remap(value, remapRange, internalRange));
-        }
+        set => vign.intensity.Override(Remap(value, remapRange, internalRange));
     }
 
     public float VignetteSmoothness
     {
-        set
-        {
-            Debug.Log("Vig Smoothness:" + value);
-            Debug.Log("Vig Smoothness Remap:" + Remap(value, remapRange, internalRange));
-            vign.smoothness.Override(Remap(value, remapRange, internalRange));
-        }
+        set => vign.smoothness.Override(Remap(value, remapRange, internalRange));
     }
 
     private Color SetVigColor
@@ -55,22 +45,12 @@ public class AttackVisualisation : MonoBehaviour
 
     public float FilmGrainIntensity
     {
-        set
-        {
-            Debug.Log("FG Intensity:" + value);
-            Debug.Log("FG Intensity Remap:" + Remap(value, remapRange, internalRange));
-            fg.intensity.Override(Remap(value, remapRange, internalRange));
-        }
+        set => fg.intensity.Override(Remap(value, remapRange, internalRange));
     }
 
     public float FilmGrainResponse
     {
-        set
-        {
-            Debug.Log("FG Intensity:" + value);
-            Debug.Log("FG Intensity Remap:" + Remap(value, remapRange, internalRange));
-            fg.response.Override(Remap(value, remapRange, internalRange));
-        }
+        set => fg.response.Override(Remap(value, remapRange, internalRange));
     }
 
     void Start()
@@ -85,7 +65,7 @@ public class AttackVisualisation : MonoBehaviour
 
     }
 
-    private void SetColor(ColorType type)
+    public void SetColor(ColorType type)
     {
         switch (type)
         {
@@ -135,8 +115,6 @@ public class AttackVisualisation : MonoBehaviour
         }
     }
 
-    public static float Remap(float value, Vector2 from, Vector2 to)
-    {
-        return math.remap(from.x, from.y, to.x, to.y, value);
-    }
+    public static float Remap(float value, Vector2 from, Vector2 to) => 
+        math.remap(from.x, from.y, to.x, to.y, value);
 }

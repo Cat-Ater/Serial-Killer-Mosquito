@@ -13,7 +13,8 @@ public class UIManager : MonoBehaviour
     public UI_DialogueDisplay _dialogueManager;
     public UI_TargetDisplay _targetDisplay; 
     public Audio_UISFXManager _audioManager;
-    public PauseMenuController _pauseMenuController; 
+    public PauseMenuController _pauseMenuController;
+    public UI_Display_TargetKill _displayTargetKill; 
 
     public static UIManager Instance
     {
@@ -30,12 +31,16 @@ public class UIManager : MonoBehaviour
         _instance._dialogueManager.SetInstanceUp(caller, data);
     }
 
+    public string SetTargetKillLine
+    {
+        set => _displayTargetKill.DisplayKillNotification(value);
+    }
+
     public void OnEnable()
     {
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(this);
         }
         else
         {
