@@ -9,12 +9,12 @@ using UI.Audio;
 [RequireComponent(typeof(Audio_UISFXManager))]
 public class UIManager : MonoBehaviour
 {
-    private static UIManager _instance;
+    private static UIManager _instance = null;
     public UI_DialogueDisplay _dialogueManager;
-    public UI_TargetDisplay _targetDisplay; 
+    public UI_TargetDisplay _targetDisplay;
     public Audio_UISFXManager _audioManager;
     public PauseMenuController _pauseMenuController;
-    public UI_Display_TargetKill _displayTargetKill; 
+    public UI_Display_TargetKill _displayTargetKill;
 
     public static UIManager Instance
     {
@@ -33,7 +33,10 @@ public class UIManager : MonoBehaviour
 
     public string SetTargetKillLine
     {
-        set => _displayTargetKill.DisplayKillNotification(value);
+        set
+        {
+            _displayTargetKill.SetText = value;
+        }
     }
 
     public void OnEnable()
@@ -41,11 +44,17 @@ public class UIManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
+            DontDestroyOnLoad(this);
         }
         else
         {
             DestroyImmediate(this);
         }
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("UI Manager Deloaded");
     }
 
     public void PauseMenuToggle()
@@ -55,7 +64,7 @@ public class UIManager : MonoBehaviour
 
     public void SetTargetData(TargetData data, bool idle, bool attacked, bool dead)
     {
-        if(_targetDisplay != null)
+        if (_targetDisplay != null)
         {
             _targetDisplay.UpdateData(data, idle, attacked, dead);
         }

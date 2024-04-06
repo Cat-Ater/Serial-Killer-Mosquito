@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => _instance;
     public Vector3 PlayerPosition { get => playerC.Position; }
     public PlayerState DisablePlayer { set => Instance.playerC.SetPlayerState = value; }
+    public string KillTagLine { set => UIManager.Instance.SetTargetKillLine = value; }
 
     public void OnEnable()
     {
@@ -114,7 +115,4 @@ public class GameManager : MonoBehaviour
             LoadUI();
         }
     }
-
-    public void SetTargetAssasinatedPhrase(string text) => 
-        UIManager.Instance.SetTargetKillLine = text; 
 }
