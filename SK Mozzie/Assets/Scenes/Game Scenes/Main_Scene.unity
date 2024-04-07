@@ -271,19 +271,49 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 889763478244876477, guid: d241c4a390322624b95b112d8313b102, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 396592400}
   m_SourcePrefab: {fileID: 100100000, guid: d241c4a390322624b95b112d8313b102, type: 3}
 --- !u!114 &396592398 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8596050602917793563, guid: d241c4a390322624b95b112d8313b102, type: 3}
   m_PrefabInstance: {fileID: 396592397}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 396592399}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a8b8654274035842adbd18bafdbac94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &396592399 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 889763478244876477, guid: d241c4a390322624b95b112d8313b102, type: 3}
+  m_PrefabInstance: {fileID: 396592397}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &396592400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396592399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47903c0a917905f43a50ef55fc18cf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueData:
+    lines:
+    - name: Testy
+      text: Test Test Test
+      speedOfLine: 0.5
+    textOpenSFX: {fileID: 8300000, guid: 0feef00a8347c984589a07bb9c1e71db, type: 3}
+    textCloseSFX: {fileID: 8300000, guid: 0feef00a8347c984589a07bb9c1e71db, type: 3}
+    textTypeSFX: {fileID: 8300000, guid: 0feef00a8347c984589a07bb9c1e71db, type: 3}
+    textSkipSFX: {fileID: 8300000, guid: 0feef00a8347c984589a07bb9c1e71db, type: 3}
+  played: 0
 --- !u!1 &621000886
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,28 +9,46 @@ using UI.Audio;
 [RequireComponent(typeof(Audio_UISFXManager))]
 public class UIManager : MonoBehaviour
 {
+    /// <summary>
+    /// Private singleton reference. 
+    /// </summary>
     private static UIManager _instance = null;
+    /// <summary>
+    /// Reference to the current dialogue manager instance. 
+    /// </summary>
     public UI_DialogueDisplay _dialogueManager;
+    /// <summary>
+    /// Reference to the current UI target display. 
+    /// </summary>
     public UI_TargetDisplay _targetDisplay;
+    /// <summary>
+    /// Reference to the current UI Audio Manager. 
+    /// </summary>
     public Audio_UISFXManager _audioManager;
+    /// <summary>
+    /// Reference to the pause menu controller. 
+    /// </summary>
     public PauseMenuController _pauseMenuController;
+    /// <summary>
+    /// Reference to the controller for displaying that a target is assasinated. 
+    /// </summary>
     public UI_Display_TargetKill _displayTargetKill;
 
+    #region Singleton. 
     public static UIManager Instance
     {
         get => _instance;
     }
+    #endregion
 
+    #region Audio.
     public static AudioClip PlaySound
     {
         set => _instance._audioManager.PlayClip(value, _instance.transform.position);
     }
+    #endregion
 
-    public static void SetDialogue(IDialogueCaller caller, UIDialogueData data)
-    {
-        _instance._dialogueManager.SetInstanceUp(caller, data);
-    }
-
+    #region Dialogue Setting.
     public string SetTargetKillLine
     {
         set
@@ -38,6 +56,14 @@ public class UIManager : MonoBehaviour
             _displayTargetKill.SetText = value;
         }
     }
+
+    public static void SetDialogue(IDialogueCaller caller, UIDialogueData data)
+    {
+        _instance._dialogueManager.SetInstanceUp(caller, data);
+    }
+    #endregion
+
+    #region Inbulits. 
 
     public void OnEnable()
     {
@@ -56,21 +82,15 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("UI Manager Deloaded");
     }
+    #endregion
 
-    public void PauseMenuToggle()
-    {
+    #region Pause Menu. 
+    public void PauseMenuToggle() =>
         _pauseMenuController.TooggleState();
-    }
+    #endregion
 
-    public void SetTargetData(TargetData data, bool idle, bool attacked, bool dead)
-    {
-        if (_targetDisplay != null)
-        {
-            _targetDisplay.UpdateData(data, idle, attacked, dead);
-        }
-        else
-        {
-            Debug.Log(">> UI_Manager: UI_TargetDisplay is not set. ");
-        }
-    }
+    #region Target Data display. 
+    public void SetTargetData(TargetData data, bool idle, bool attacked, bool dead) =>
+        _targetDisplay.UpdateData(data, idle, attacked, dead);
+    #endregion
 }
