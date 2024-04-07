@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     /// Reference to the controller for displaying that a target is assasinated. 
     /// </summary>
     public UI_Display_TargetKill _displayTargetKill;
+    public SettingsMenu settingsMenu; 
 
     #region Singleton. 
     public static UIManager Instance
