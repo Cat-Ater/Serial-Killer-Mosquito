@@ -18,28 +18,31 @@ public class TargetData : MonoBehaviour
 {
     public TargetHealth targetHealth;
     public TargetDataStruct tData;
+    public TargetController targetController;
 
     public string TargetName => tData.name;
     public int Index => tData.index;
     public float HealthMax => tData.healthMax;
     public float HealthCurrent
     {
-        get => tData.healthCurrent; 
+        get => tData.healthCurrent;
         set
         {
             tData.healthCurrent = Mathf.Clamp(tData.healthCurrent + value, 0, HealthMax);
         }
-    } 
+    }
     public float RateOfExtraction => tData.rateOfExtraction;
-    public bool playIdleAnim = true; 
-    public bool playAttackAnim = true; 
-    public bool playDeathAnim = true;
-    public bool deathAnimComplete = false;
-    public float timeTillDead;
 
+    [HideInInspector] public bool playIdleAnim = true;
+    [HideInInspector] public bool playAttackAnim = false;
+    [HideInInspector] public bool playDeathAnim = false;
+    [HideInInspector] public bool deathAnimComplete = false;
+
+    public float timeTillDead;
+    public bool IsDead => tData.healthCurrent <= 0;
     public void OnValidate()
     {
-        timeTillDead = (tData.healthMax / RateOfExtraction);    
+        timeTillDead = (tData.healthMax / RateOfExtraction);
     }
 
     public void OnEnable()
@@ -49,11 +52,15 @@ public class TargetData : MonoBehaviour
 
     public void Update()
     {
-        if(targetHealth.state == TargetHealthState.ATTACKED)
+        if (targetController.active)
         {
-            targetHealth.UpdateData(ref tData);
+            if (targetHealth.state == TargetHealthState.ATTACKED)
+            {
+                targetHealth.UpdateData(ref tData);
+            }
+            ResolveTargetState();
+            UIManager.Instance.SetTargetData(this, playIdleAnim, playAttackAnim, playDeathAnim);
         }
-        ResolveTargetState(); 
     }
 
     private void ResolveTargetState()
@@ -64,13 +71,13 @@ public class TargetData : MonoBehaviour
         switch (targetHealth.state)
         {
             case TargetHealthState.ALIVE:
-                Animation_Idle(); 
+                Animation_Idle();
                 break;
             case TargetHealthState.ATTACKED:
                 Animation_Attacked();
                 break;
             case TargetHealthState.DEAD:
-                Animation_Dead(); 
+                Animation_Dead();
                 break;
         }
     }

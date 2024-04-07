@@ -35,8 +35,16 @@ public class AudioInputController : MonoBehaviour
         get => sampleWindow;
         set => sampleWindow = value; 
     }
-    public float Average { get; set; }
-    public float Peak { get; set; }
+
+    public float Average { 
+        get; 
+        set; 
+    }
+    
+    public float Peak { 
+        get; 
+        set; 
+    }
 
     #region Built In Functions.
     private void OnEnable()
@@ -152,4 +160,3 @@ public class AudioInputController : MonoBehaviour
         return Remap(value, rangeA.x, rangeA.y, rangeB.x, rangeB.y);
     }
 }
-

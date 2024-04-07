@@ -54,8 +54,10 @@ public class GameManager : MonoBehaviour
     public Audio_GameSFXSystem _gameSFXSys;
     [HideInInspector] public AttackVisualisation attackVisualisation;
     public CameraData[] cameraData;
-    public List<TargetData> Targets;
+    public List<TargetController> Targets;
+    public int targetDataIndex = 0; 
     public PlayerRaidalDistance playerRaidusWorld;
+    public bool PlayerIntroComplete = false; 
 
     public static GameManager Instance => _instance;
     public Vector3 PlayerPosition { get => playerC.Position; }
@@ -106,16 +108,24 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
-        {
             UIManager.Instance.PauseMenuToggle();
-        }
 
         if (UIManager.Instance == null || playerC == null)
             return;
 
+        UpdateWorldRadius();
+
+        if(PlayerIntroComplete == true)
+        {
+            SetInitalTarget();
+        }
+    }
+
+    private void UpdateWorldRadius()
+    {
         //Player zone Detection. 
         bool playerOutsideZone = playerRaidusWorld.OutsideRadius(playerC.Position);
-        float intensity = 100 / playerDeathSpeed; 
+        float intensity = 100 / playerDeathSpeed;
 
         if (playerOutsideZone)
         {
@@ -128,15 +138,14 @@ public class GameManager : MonoBehaviour
 
             if (currentTimeOutside >= playerDeathSpeed)
                 LoadLevel("MainMenu");
-        } 
+        }
 
-        if(currentTimeOutside > 0 && !playerOutsideZone)
+        if (currentTimeOutside > 0 && !playerOutsideZone)
         {
             currentTimeOutside = 0;
             attackVisualisation.VignetteIntensity = 0;
             attackVisualisation.SetPostProcessingSettings();
         }
-
     }
 
     public void SwitchCamera(string name)
@@ -150,14 +159,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetTargetSelectionActive()
+    public void SetInitalTarget()
     {
-
+        targetDataIndex = 0;
+        Targets[targetDataIndex].SetActive();
     }
 
     public void SetNextTarget()
     {
-
+        targetDataIndex++; 
+        if(targetDataIndex >= Targets.Count)
+        {
+            Debug.Log("Game Completed");
+            //Resolve game complete. 
+        }
+        else
+        {
+            Targets[targetDataIndex].SetActive();
+        }
     }
 
     public void LoadLevel(string name)
