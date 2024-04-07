@@ -385,7 +385,7 @@ MonoBehaviour:
       speedOfLine: 1
     textOpenSFX: {fileID: 8300000, guid: 921ab46e3fb9da04e93a1db90420d39c, type: 3}
     textCloseSFX: {fileID: 8300000, guid: 6117129d15706eb47aa4adaa6828538f, type: 3}
-    textTypeSFX: {fileID: 8300000, guid: 0aa4e4bed5943eb44acaf27f3eebee49, type: 3}
+    textTypeSFX: {fileID: 8300000, guid: 184061be858a99244ac52c1ae1625b96, type: 3}
     textSkipSFX: {fileID: 8300000, guid: 505483ab299ceb746a54695c0a184397, type: 3}
     pausePlayer: 1
     skipEnabled: 1
@@ -930,10 +930,10 @@ MonoBehaviour:
     - name: Steve
       text: What the hell is that?
       speedOfLine: 1
-    textOpenSFX: {fileID: 8300000, guid: 921ab46e3fb9da04e93a1db90420d39c, type: 3}
+    textOpenSFX: {fileID: 8300000, guid: 8a6241b75b219404d8f8a7ae70682117, type: 3}
     textCloseSFX: {fileID: 8300000, guid: 6117129d15706eb47aa4adaa6828538f, type: 3}
     textTypeSFX: {fileID: 8300000, guid: 2e2ec12e662e3174493457088410d06b, type: 3}
-    textSkipSFX: {fileID: 8300000, guid: 505483ab299ceb746a54695c0a184397, type: 3}
+    textSkipSFX: {fileID: 0}
     pausePlayer: 0
     skipEnabled: 0
 --- !u!114 &1496393100
@@ -1703,10 +1703,7 @@ MonoBehaviour:
   dialogueData:
     lines:
     - name: Slobber
-      text: test
-      speedOfLine: 1
-    - name: Slobber
-      text: test2
+      text: Woof?
       speedOfLine: 1
     textOpenSFX: {fileID: 8300000, guid: 921ab46e3fb9da04e93a1db90420d39c, type: 3}
     textCloseSFX: {fileID: 8300000, guid: 6117129d15706eb47aa4adaa6828538f, type: 3}
