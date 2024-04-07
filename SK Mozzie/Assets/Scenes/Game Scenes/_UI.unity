@@ -196,7 +196,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogueManager: {fileID: 19155370}
   _targetDisplay: {fileID: 19155373}
-  _audioManager: {fileID: 19155369}
   _pauseMenuController: {fileID: 19155374}
   _displayTargetKill: {fileID: 19155375}
 --- !u!4 &19155372
@@ -1213,17 +1212,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809717633}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -244.18597}
+  m_LocalScale: {x: 0.42018571, y: 1.3289213, z: 1.3289213}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1114233656}
+  m_Father: {fileID: 2074428769}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 999, y: 251}
+  m_AnchoredPosition: {x: 1.576355, y: -164.78616}
   m_SizeDelta: {x: 29.1354, y: 87.8873}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &809717635
@@ -1643,7 +1642,6 @@ Transform:
   - {fileID: 413389495}
   - {fileID: 842447927}
   - {fileID: 1143059775}
-  - {fileID: 809717634}
   m_Father: {fileID: 1590888867}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3428,6 +3426,7 @@ RectTransform:
   m_LocalScale: {x: 2.3799, y: 0.75249, z: 0.75249}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 809717634}
   - {fileID: 728512868}
   m_Father: {fileID: 1114233656}
   m_RootOrder: -1
