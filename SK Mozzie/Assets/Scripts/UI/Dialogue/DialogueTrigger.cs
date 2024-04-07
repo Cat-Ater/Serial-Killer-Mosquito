@@ -9,7 +9,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueCaller {
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player" && isTriggerable)
+        if (other.gameObject.tag == "Player" && isTriggerable)
             TriggerDialogue();
     }
 
