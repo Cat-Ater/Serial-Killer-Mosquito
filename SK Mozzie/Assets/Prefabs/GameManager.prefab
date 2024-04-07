@@ -57,6 +57,11 @@ MonoBehaviour:
     active: 0
   Targets:
   - {fileID: 0}
+  playerRaidusWorld:
+    centerPos: {fileID: 0}
+    radius: 150
+  playerDeathSpeed: 0.55
+  currentTimeOutside: 0
 --- !u!114 &2372515753691876594
 MonoBehaviour:
   m_ObjectHideFlags: 0

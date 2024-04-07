@@ -24,6 +24,27 @@ public class CameraData
     }
 }
 
+[System.Serializable]
+public struct PlayerRaidalDistance
+{
+    public Transform centerPos; 
+    public float radius; 
+
+    public bool OutsideRadius(Vector3 position)
+    {
+        Vector3 centre = centerPos.position;
+        Vector3 player = position;
+        Vector3 distanceVec = centre - player;
+        Vector3 unitVec = distanceVec.normalized;
+        if( distanceVec.magnitude >= (radius * unitVec).magnitude)
+        {
+            return true; 
+        }
+
+        return false;
+    }
+}
+
 public class GameManager : MonoBehaviour
 {
     public const string UI_SCENE_NAME = "_UI";
@@ -33,7 +54,8 @@ public class GameManager : MonoBehaviour
     public Audio_GameSFXSystem _gameSFXSys;
     [HideInInspector] public AttackVisualisation attackVisualisation;
     public CameraData[] cameraData;
-    public List<TargetData> Targets; 
+    public List<TargetData> Targets;
+    public PlayerRaidalDistance playerRaidusWorld;
 
     public static GameManager Instance => _instance;
     public Vector3 PlayerPosition { get => playerC.Position; }
@@ -77,12 +99,44 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //Current outside zone damange. 
+    public float playerDeathSpeed = 0.55f;
+    public float currentTimeOutside = 0; 
+
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
         {
             UIManager.Instance.PauseMenuToggle();
         }
+
+        if (UIManager.Instance == null || playerC == null)
+            return;
+
+        //Player zone Detection. 
+        bool playerOutsideZone = playerRaidusWorld.OutsideRadius(playerC.Position);
+        float intensity = 100 / playerDeathSpeed; 
+
+        if (playerOutsideZone)
+        {
+            currentTimeOutside += Time.deltaTime;
+
+            //Update shader
+            attackVisualisation.SetColor(ColorType.FAILURE);
+            attackVisualisation.VignetteIntensity = intensity * currentTimeOutside;
+            attackVisualisation.SetPostProcessingSettings();
+
+            if (currentTimeOutside >= playerDeathSpeed)
+                LoadLevel("MainMenu");
+        } 
+
+        if(currentTimeOutside > 0 && !playerOutsideZone)
+        {
+            currentTimeOutside = 0;
+            attackVisualisation.VignetteIntensity = 0;
+            attackVisualisation.SetPostProcessingSettings();
+        }
+
     }
 
     public void SwitchCamera(string name)
@@ -114,5 +168,14 @@ public class GameManager : MonoBehaviour
         {
             LoadUI();
         }
+    }
+
+    public void OnDrawGizmos()
+    {
+        Color color = Color.green;
+        color.a = 0.5F;
+        Gizmos.color = color;
+        if(playerRaidusWorld.centerPos != null)
+            Gizmos.DrawSphere(playerRaidusWorld.centerPos.position, playerRaidusWorld.radius);
     }
 }
