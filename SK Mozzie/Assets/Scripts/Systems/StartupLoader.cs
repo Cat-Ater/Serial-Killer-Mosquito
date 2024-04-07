@@ -18,7 +18,7 @@ public class StartupLoader : MonoBehaviour
 
     private IEnumerator TransitionTimer()
     {
-        yield return new WaitForSeconds(10F);
+        yield return new WaitForSeconds(15F);
         GameManager.Instance.LoadLevel("MainMenu");
     }
 }
