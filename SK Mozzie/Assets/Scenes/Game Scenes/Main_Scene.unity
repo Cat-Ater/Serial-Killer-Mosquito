@@ -306,8 +306,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueData:
     lines:
-    - name: Testy
+    - name: Roger
       text: Test Test Test
+      speedOfLine: 0.5
+    - name: Roger
+      text: Test Test Test1
+      speedOfLine: 0.5
+    - name: Roger
+      text: Test Test Test2
       speedOfLine: 0.5
     textOpenSFX: {fileID: 8300000, guid: 0feef00a8347c984589a07bb9c1e71db, type: 3}
     textCloseSFX: {fileID: 8300000, guid: 0feef00a8347c984589a07bb9c1e71db, type: 3}
