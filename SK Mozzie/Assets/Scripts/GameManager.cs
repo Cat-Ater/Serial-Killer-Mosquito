@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Game Completed");
             //Resolve game complete. 
+            LoadLevel("GameOver");
         }
         else
         {
