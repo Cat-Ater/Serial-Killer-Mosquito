@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fd40c1e978eb0b046a331005a6e70278, type: 3}
       propertyPath: m_Name
-      value: Dog Variant
+      value: Target_Dog
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -144,10 +144,11 @@ MonoBehaviour:
   targetHealth: {fileID: 7027236214595384057}
   tData:
     name: Dogger
-    index: 0
+    index: 1
     healthCurrent: 1000
     healthMax: 1000
     rateOfExtraction: 30
+    killCompletionLine: You woofed for the last time, DOG!
   playIdleAnim: 1
   playAttackAnim: 1
   playDeathAnim: 1

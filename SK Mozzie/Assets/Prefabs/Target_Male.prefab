@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6b31cccc57bf43444bb8da8b362af9ed, type: 3}
       propertyPath: m_Name
-      value: Male Variant
+      value: Target_Male
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -169,11 +169,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetHealth: {fileID: 820403991851288800}
   tData:
-    name: 
-    index: 0
+    name: Steve
+    index: 2
     healthCurrent: 10000
     healthMax: 10000
     rateOfExtraction: 125
+    killCompletionLine: God I hate humans.
   playIdleAnim: 1
   playAttackAnim: 1
   playDeathAnim: 1
