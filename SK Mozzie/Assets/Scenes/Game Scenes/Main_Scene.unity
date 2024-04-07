@@ -198,6 +198,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 889763478244876477, guid: d241c4a390322624b95b112d8313b102, type: 3}
       insertIndex: -1
       addedObject: {fileID: 396592400}
+    - targetCorrespondingSourceObject: {fileID: 889763478244876477, guid: d241c4a390322624b95b112d8313b102, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 396592401}
   m_SourcePrefab: {fileID: 100100000, guid: d241c4a390322624b95b112d8313b102, type: 3}
 --- !u!1 &396592399 stripped
 GameObject:
@@ -247,9 +250,30 @@ MonoBehaviour:
     textCloseSFX: {fileID: 8300000, guid: 6117129d15706eb47aa4adaa6828538f, type: 3}
     textTypeSFX: {fileID: 8300000, guid: 3137bb3a2105f8a45914ba5fc70f0099, type: 3}
     textSkipSFX: {fileID: 8300000, guid: 505483ab299ceb746a54695c0a184397, type: 3}
-    pausePlayer: 0
+    pausePlayer: 1
     skipEnabled: 1
   played: 0
+--- !u!114 &396592401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396592399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08cacadc25ceaf84893587e0e64975c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    PlayWhen: 5
+    minDist: 1
+    maxDist: 4
+    minVol: 0
+    maxVol: 1
+    playLooped: 0
+  clip: {fileID: 8300000, guid: 4749ec74afecee84c82e36de9cd21dcb, type: 3}
+  intervalTime: 0
 --- !u!114 &564455619 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5077001211200687069, guid: 516b740aaabaa7848aa0bd196bb9f982, type: 3}
@@ -513,7 +537,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a511491408adbd643a7708120c36606f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -634,7 +658,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412314255}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.278513, y: -23.04596, z: 39.183624}
+  m_LocalPosition: {x: 8.278513, y: 1.9, z: 39.183624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
