@@ -387,7 +387,7 @@ MonoBehaviour:
     textCloseSFX: {fileID: 8300000, guid: 6117129d15706eb47aa4adaa6828538f, type: 3}
     textTypeSFX: {fileID: 8300000, guid: 184061be858a99244ac52c1ae1625b96, type: 3}
     textSkipSFX: {fileID: 8300000, guid: 505483ab299ceb746a54695c0a184397, type: 3}
-    pausePlayer: 1
+    pausePlayer: 0
     skipEnabled: 1
   played: 0
 --- !u!114 &564455619 stripped
@@ -932,7 +932,7 @@ MonoBehaviour:
       speedOfLine: 1
     textOpenSFX: {fileID: 8300000, guid: 8a6241b75b219404d8f8a7ae70682117, type: 3}
     textCloseSFX: {fileID: 8300000, guid: 6117129d15706eb47aa4adaa6828538f, type: 3}
-    textTypeSFX: {fileID: 8300000, guid: 2e2ec12e662e3174493457088410d06b, type: 3}
+    textTypeSFX: {fileID: 8300000, guid: 184061be858a99244ac52c1ae1625b96, type: 3}
     textSkipSFX: {fileID: 0}
     pausePlayer: 0
     skipEnabled: 0
@@ -1531,16 +1531,10 @@ PrefabInstance:
       addedObject: {fileID: 5102174263878351235}
     - targetCorrespondingSourceObject: {fileID: 5328409058679327344, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5102174263878351236}
-    - targetCorrespondingSourceObject: {fileID: 5328409058679327344, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5102174263878351237}
     - targetCorrespondingSourceObject: {fileID: 5328409058679327344, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5102174263878351241}
-    - targetCorrespondingSourceObject: {fileID: 5328409058679327344, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5102174263878351242}
     - targetCorrespondingSourceObject: {fileID: 5328409058679327344, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5102174263878351243}
@@ -1672,22 +1666,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5102174263878351236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5102174263878351232}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f179bacc218ec8e4cb7e7c984d8f0d21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 5102174263878351235}
-  audioClipArray:
-  - {fileID: 8300000, guid: 7d5f7a82526c46042a5cf3351ce136fb, type: 3}
-  timeBetweenShots: 8
 --- !u!114 &5102174263878351237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1705,10 +1683,10 @@ MonoBehaviour:
     - name: Slobber
       text: Woof?
       speedOfLine: 1
-    textOpenSFX: {fileID: 8300000, guid: 921ab46e3fb9da04e93a1db90420d39c, type: 3}
+    textOpenSFX: {fileID: 8300000, guid: 7d5f7a82526c46042a5cf3351ce136fb, type: 3}
     textCloseSFX: {fileID: 8300000, guid: 6117129d15706eb47aa4adaa6828538f, type: 3}
-    textTypeSFX: {fileID: 8300000, guid: d5e826bde27af754cb012091f1a6e25e, type: 3}
-    textSkipSFX: {fileID: 8300000, guid: 505483ab299ceb746a54695c0a184397, type: 3}
+    textTypeSFX: {fileID: 8300000, guid: 184061be858a99244ac52c1ae1625b96, type: 3}
+    textSkipSFX: {fileID: 0}
     pausePlayer: 0
     skipEnabled: 0
 --- !u!95 &5102174263878351241
@@ -1732,27 +1710,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5102174263878351242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5102174263878351232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08cacadc25ceaf84893587e0e64975c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    PlayWhen: 15
-    minDist: 1
-    maxDist: 5
-    minVol: 0
-    maxVol: 1
-    playLooped: 0
-  clip: {fileID: 8300000, guid: 7d5f7a82526c46042a5cf3351ce136fb, type: 3}
-  intervalTime: 8
 --- !u!114 &5102174263878351243
 MonoBehaviour:
   m_ObjectHideFlags: 0
