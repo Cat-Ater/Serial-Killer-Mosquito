@@ -35,6 +35,8 @@ namespace UI
         [Header("The AudioClip to play on skipping to the end of the dialogue line. ")]
         public AudioClip textSkipSFX;
 
+        public bool pausePlayer;
+        public bool skipEnabled; 
         /// <summary>
         /// The number of lines within the dialogue. 
         /// </summary>

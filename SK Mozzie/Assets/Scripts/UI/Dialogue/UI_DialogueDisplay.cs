@@ -15,13 +15,13 @@ namespace UI.System
         int _lineIndex;
         int _charIndex;
         bool skipEnabled = false;
-        public Animator animator; 
+        public Animator animator;
         [Header("Textbox used to display character name.")]
-        public TextMeshProUGUI nameOutput; 
+        public TextMeshProUGUI nameOutput;
         [Header("Textbox used to display line output.")]
         public TextMeshProUGUI textOutput;
         public UI_DialogueState _dialogueState = UI_DialogueState.INACTIVE;
-        public UIDialogueData dialogueData; 
+        public UIDialogueData dialogueData;
 
         public string DisplayStr
         {
@@ -37,13 +37,14 @@ namespace UI.System
             _dialogueState = UI_DialogueState.INIT;
             _caller = caller;
             //Set the data. 
-            dialogueData = data; 
+            dialogueData = data;
 
             //Reset values. 
             ResetState(true);
 
-            //TODO: IMPLEMENT THIS.
-            ///PlayerController.Instance.PlayerEnabled = false;
+            if (data.pausePlayer)
+                GameManager.Instance.DisablePlayer = PlayerState.DISABLED;
+
             UIManager.PlaySound = data.textOpenSFX;
             animator.SetBool("IsOpen", true);
 
@@ -63,12 +64,13 @@ namespace UI.System
             if (_dialogueState == UI_DialogueState.INACTIVE)
                 return;
 
-            if (Input.anyKey && _dialogueState == UI_DialogueState.SCROLLING && skipEnabled)
-            {
+            if (Input.anyKey && _dialogueState == UI_DialogueState.SCROLLING && skipEnabled && dialogueData.skipEnabled)
+            {       
                 UIManager.PlaySound = dialogueData.textSkipSFX;
                 _dialogueState = UI_DialogueState.SCROLL_INTERUPT;
                 StartCoroutine(KeypressSpamPrevention());
             }
+
             if (Input.anyKey && _dialogueState == UI_DialogueState.LINE_WAIT)
             {
                 _lineIndex++;
@@ -80,8 +82,9 @@ namespace UI.System
                     UIManager.PlaySound = dialogueData.textCloseSFX;
                     _dialogueState = UI_DialogueState.INACTIVE;
 
-                    //TODO: Implement this. 
-                    //PlayerController.Instance.PlayerEnabled = true;
+                    if (dialogueData.pausePlayer)
+                        GameManager.Instance.DisablePlayer = PlayerState.ENABLED;
+
                     animator.SetBool("IsOpen", false);
                     _caller.DisplayComplete();
                     ResetState(false);
@@ -105,7 +108,7 @@ namespace UI.System
             _charIndex = 0;
 
             //Set the characters name: 
-            textOutput.name = line.name; 
+            textOutput.name = line.name;
 
             while (DisplayStr.Length < line.TextLength && _dialogueState != UI_DialogueState.SCROLL_INTERUPT)
             {
