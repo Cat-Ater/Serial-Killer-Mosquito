@@ -998,6 +998,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Male
       objectReference: {fileID: 0}
+    - target: {fileID: 5077001211200687069, guid: 516b740aaabaa7848aa0bd196bb9f982, type: 3}
+      propertyPath: timeTillDead
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077001211200687069, guid: 516b740aaabaa7848aa0bd196bb9f982, type: 3}
+      propertyPath: tData.healthMax
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077001211200687069, guid: 516b740aaabaa7848aa0bd196bb9f982, type: 3}
+      propertyPath: tData.healthCurrent
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077001211200687069, guid: 516b740aaabaa7848aa0bd196bb9f982, type: 3}
+      propertyPath: tData.killCompletionLine
+      value: Humans. They are like mosquitos, just alot worse!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1609,8 +1625,12 @@ PrefabInstance:
       value: 172.105
       objectReference: {fileID: 0}
     - target: {fileID: 3486595355973026529, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
+      propertyPath: tData.name
+      value: Slobber
+      objectReference: {fileID: 0}
+    - target: {fileID: 3486595355973026529, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
       propertyPath: timeTillDead
-      value: 25
+      value: 12.5
       objectReference: {fileID: 0}
     - target: {fileID: 3486595355973026529, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
       propertyPath: playDeathAnim
@@ -1619,6 +1639,14 @@ PrefabInstance:
     - target: {fileID: 3486595355973026529, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
       propertyPath: playAttackAnim
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3486595355973026529, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
+      propertyPath: tData.healthMax
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3486595355973026529, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
+      propertyPath: tData.healthCurrent
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 3486595355973026529, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
       propertyPath: tData.rateOfExtraction
