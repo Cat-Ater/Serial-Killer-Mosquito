@@ -157,7 +157,7 @@ public class Game_SFX : MonoBehaviour
     public void PlaySound()
     {
         GameManager.Instance.PlaySoundFXAt(gameObject.transform.position, clip, data);
-        gameObject.SetActive(false);
+        this.enabled = false;
     }
 
     public void OnDrawGizmos()
