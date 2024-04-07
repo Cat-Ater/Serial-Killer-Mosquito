@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &627010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 627011}
+  - component: {fileID: 627012}
+  m_Layer: 0
+  m_Name: WorldCentre
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &627011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627010}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -74.3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &627012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 674092c382afc4b4489bfc6cd11c49c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &145784061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -137,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2726125680697961490, guid: fc708a1b01aeef24c87699cfa1559c1a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -52.7
       objectReference: {fileID: 0}
     - target: {fileID: 2726125680697961490, guid: fc708a1b01aeef24c87699cfa1559c1a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -195,6 +239,14 @@ PrefabInstance:
       propertyPath: Targets.Array.data[1]
       value: 
       objectReference: {fileID: 1496393091}
+    - target: {fileID: 7719019489871085981, guid: fc708a1b01aeef24c87699cfa1559c1a, type: 3}
+      propertyPath: playerRaidusWorld.radius
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719019489871085981, guid: fc708a1b01aeef24c87699cfa1559c1a, type: 3}
+      propertyPath: playerRaidusWorld.centerPos
+      value: 
+      objectReference: {fileID: 627011}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -319,6 +371,8 @@ MonoBehaviour:
     textCloseSFX: {fileID: 8300000, guid: 0feef00a8347c984589a07bb9c1e71db, type: 3}
     textTypeSFX: {fileID: 8300000, guid: 0feef00a8347c984589a07bb9c1e71db, type: 3}
     textSkipSFX: {fileID: 8300000, guid: 0feef00a8347c984589a07bb9c1e71db, type: 3}
+    pausePlayer: 0
+    skipEnabled: 0
   played: 0
 --- !u!1 &621000886
 GameObject:
@@ -1124,6 +1178,8 @@ MonoBehaviour:
     textCloseSFX: {fileID: 0}
     textTypeSFX: {fileID: 0}
     textSkipSFX: {fileID: 0}
+    pausePlayer: 0
+    skipEnabled: 0
 --- !u!1 &1896391654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,3 +1715,5 @@ MonoBehaviour:
     textCloseSFX: {fileID: 0}
     textTypeSFX: {fileID: 0}
     textSkipSFX: {fileID: 0}
+    pausePlayer: 0
+    skipEnabled: 0
