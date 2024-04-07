@@ -72,6 +72,11 @@ public class GameManager : MonoBehaviour
 
         UpdateWorldRadius();
 
+        if (Targets[targetDataIndex].active)
+        {
+            UIManager.Instance._targetDisplay.InitData(ref Targets[targetDataIndex].targetData.tData);
+        }
+
         if (PlayerIntroComplete == true)
         {
             SetInitalTarget();

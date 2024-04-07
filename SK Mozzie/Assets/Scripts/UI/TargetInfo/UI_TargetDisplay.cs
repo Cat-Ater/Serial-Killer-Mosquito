@@ -42,8 +42,6 @@ public class UIElement
         if (this.state == state)
             return;
 
-        Debug.Log(state.ToString());
-
         switch (state)
         {
             case UIElementState.DISABLED:
@@ -77,6 +75,8 @@ namespace UI
 {
     public class UI_TargetDisplay : MonoBehaviour
     {
+        public TargetDataStruct data;
+
         string targetName; // The name of the target. 
         int targetIndex; // The index of the target (Imagine this as the target number in a list). 
         float currentHealth; // The current health of the player. 
@@ -97,19 +97,14 @@ namespace UI
         }
 
         #region  Base System stuff. 
-        internal void InitData(TargetData data)
+        internal void InitData(ref TargetDataStruct data)
         {
-            targetName = name;
-            targetIndex = data.Index;
-            currentHealth = data.HealthCurrent;
-            healthMax = data.HealthMax;
+            this.data = data;
             OnIdle();
         }
 
-        internal void UpdateData(TargetData data, bool idle, bool attacked, bool dead)
+        internal void UpdateData(bool idle, bool attacked, bool dead)
         {
-            currentHealth = data.HealthCurrent;
-            healthMax = data.HealthMax;
             UpdateUI();
             if (idle)
             {
@@ -132,10 +127,10 @@ namespace UI
         internal void UpdateUI()
         {
             //Do general UI updates here. 
-            nameOutput.SetText = targetName;
-            targetNumberOutput.SetText = targetIndex.ToString();
-            currentHealthOutput.SetText = currentHealth.ToString();
-            maxHealthOutput.SetText = healthMax.ToString();
+            nameOutput.SetText = data.name;
+            targetNumberOutput.SetText = data.index.ToString();
+            currentHealthOutput.SetText = data.healthCurrent.ToString();
+            maxHealthOutput.SetText = data.healthMax.ToString();
         }
 
         public void OnIdle()
@@ -160,18 +155,17 @@ namespace UI
 
         public void OnDeath()
         {
-            //Do any updates related to Death UI stuff here.
-            nameOutput.SetState(UIElementState.DEAD);
-            targetNumberOutput.SetState(UIElementState.DEAD);
-            currentHealthOutput.SetState(UIElementState.DEAD);
-            maxHealthOutput.SetState(UIElementState.DEAD);
-
             StartCoroutine(DisableTimer());
         }
 
         private IEnumerator DisableTimer()
         {
-            yield return new WaitForSeconds(1.5F);
+            //Do any updates related to Death UI stuff here.
+            nameOutput.SetState(UIElementState.DEAD);
+            targetNumberOutput.SetState(UIElementState.DEAD);
+            currentHealthOutput.SetState(UIElementState.DEAD);
+            maxHealthOutput.SetState(UIElementState.DEAD);
+            yield return new WaitForSeconds(0.5F);
             nameOutput.SetState(UIElementState.DISABLED);
             targetNumberOutput.SetState(UIElementState.DISABLED);
             currentHealthOutput.SetState(UIElementState.DISABLED);

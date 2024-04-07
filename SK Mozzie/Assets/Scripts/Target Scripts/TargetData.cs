@@ -39,7 +39,9 @@ public class TargetData : MonoBehaviour
     [HideInInspector] public bool deathAnimComplete = false;
 
     public float timeTillDead;
+    
     public bool IsDead => tData.healthCurrent <= 0;
+
     public void OnValidate()
     {
         timeTillDead = (tData.healthMax / RateOfExtraction);
@@ -54,12 +56,16 @@ public class TargetData : MonoBehaviour
     {
         if (targetController.active)
         {
+            if(UIManager.Instance._targetDisplay.data.index != tData.index)
+            {
+                UIManager.Instance._targetDisplay.InitData(ref tData);
+            }
             if (targetHealth.state == TargetHealthState.ATTACKED)
             {
                 targetHealth.UpdateData(ref tData);
             }
             ResolveTargetState();
-            UIManager.Instance.SetTargetData(this, playIdleAnim, playAttackAnim, playDeathAnim);
+            UIManager.Instance.SetTargetData(playIdleAnim, playAttackAnim, playDeathAnim);
         }
     }
 
