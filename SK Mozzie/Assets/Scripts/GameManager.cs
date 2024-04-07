@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         }
 
         //Generate Audio Setup. 
-        audioManager = new GMAudioManagement(); 
+        audioManager = new GMAudioManagement();
     }
 
     void Start()
@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Target Handling. 
+
     public void SetInitalTarget()
     {
         targetDataIndex = 0;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -750,6 +750,10 @@ PrefabInstance:
       value: Male
       objectReference: {fileID: 0}
     - target: {fileID: 5077001211200687069, guid: 516b740aaabaa7848aa0bd196bb9f982, type: 3}
+      propertyPath: tData.index
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077001211200687069, guid: 516b740aaabaa7848aa0bd196bb9f982, type: 3}
       propertyPath: timeTillDead
       value: 8
       objectReference: {fileID: 0}
@@ -1104,6 +1108,10 @@ PrefabInstance:
       value: Slobber
       objectReference: {fileID: 0}
     - target: {fileID: 3486595355973026529, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
+      propertyPath: tData.index
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3486595355973026529, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
       propertyPath: timeTillDead
       value: 12.5
       objectReference: {fileID: 0}
@@ -1427,7 +1435,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5102174263878351232}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}

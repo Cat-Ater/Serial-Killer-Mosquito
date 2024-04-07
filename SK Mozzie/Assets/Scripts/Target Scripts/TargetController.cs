@@ -8,11 +8,6 @@ public class TargetController : MonoBehaviour
     public TargetData targetData;
     public bool active = false;
 
-    public void Start()
-    {
-        GameManager.Instance.Targets.Add(this);
-    }
-
     public void SetActive()
     {
         active = true; 

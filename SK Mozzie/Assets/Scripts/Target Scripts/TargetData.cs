@@ -71,33 +71,18 @@ public class TargetData : MonoBehaviour
         switch (targetHealth.state)
         {
             case TargetHealthState.ALIVE:
-                Animation_Idle();
+                playIdleAnim = true;
+                playDeathAnim = playAttackAnim = false;
                 break;
             case TargetHealthState.ATTACKED:
-                Animation_Attacked();
+                playAttackAnim = true;
+                playDeathAnim = playIdleAnim = false;
                 break;
             case TargetHealthState.DEAD:
-                Animation_Dead();
+                playDeathAnim = true;
+                playAttackAnim = playIdleAnim = false;
                 break;
         }
-    }
-
-    public void Animation_Idle()
-    {
-        playIdleAnim = true;
-        playDeathAnim = playAttackAnim = false;
-    }
-
-    public void Animation_Attacked()
-    {
-        playAttackAnim = true;
-        playDeathAnim = playIdleAnim = false;
-    }
-
-    public void Animation_Dead()
-    {
-        playDeathAnim = true;
-        playAttackAnim = playIdleAnim = false;
     }
 
     public void OnDeathAnimCompleted()

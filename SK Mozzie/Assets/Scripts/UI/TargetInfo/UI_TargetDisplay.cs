@@ -32,7 +32,7 @@ public class UIElement
 
     public string SetText
     {
-        set => textOutput.text = value; 
+        set => textOutput.text = value;
     }
 
     public void Setup() => SetState(UIElementState.DISABLED);
@@ -41,6 +41,8 @@ public class UIElement
     {
         if (this.state == state)
             return;
+
+        Debug.Log(state.ToString());
 
         switch (state)
         {
@@ -109,21 +111,23 @@ namespace UI
             currentHealth = data.HealthCurrent;
             healthMax = data.HealthMax;
             UpdateUI();
-            if (idle) OnIdle();
-            if (attacked) OnAttack();
-            if (dead) OnDeath();
+            if (idle)
+            {
+                OnIdle();
+                return;
+            }
+            if (attacked)
+            {
+                OnAttack();
+                return;
+            }
+            if (dead)
+            {
+                OnDeath();
+                return;
+            }
         }
         #endregion
-
-        internal void OnActivation()
-        {
-            //Do UI stuff here. 
-            rootObject.SetActive(true);
-            nameOutput.SetState(UIElementState.ALIVE);
-            targetNumberOutput.SetState(UIElementState.ALIVE);
-            currentHealthOutput.SetState(UIElementState.ALIVE);
-            maxHealthOutput.SetState(UIElementState.ALIVE);
-        }
 
         internal void UpdateUI()
         {

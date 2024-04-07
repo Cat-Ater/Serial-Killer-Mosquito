@@ -7,6 +7,7 @@ public class UI_Display_TargetKill : MonoBehaviour
 {
     public GameObject rootObject;
     public TextMeshProUGUI textBox; 
+    
     public string SetText
     {
         set { DisplayKillNotification(value); }

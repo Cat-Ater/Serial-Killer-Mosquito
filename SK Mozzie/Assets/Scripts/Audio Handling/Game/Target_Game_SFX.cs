@@ -41,6 +41,7 @@ public class Target_Game_SFX : MonoBehaviour
         if (targetData.HealthCurrent <= 0 && data.PlayWhen == TargetAudioEffect.TARGET_ON_DEATH)
         {
             GameManager.Instance.PlaySoundFXAt(transform.position, clip, data.ToSFXData());
+            this.enabled = false; 
         }
     }
 
