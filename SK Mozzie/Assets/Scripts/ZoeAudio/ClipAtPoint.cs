@@ -5,7 +5,7 @@ using UnityEngine;
 public class ClipAtPoint : MonoBehaviour
 {
     public AudioClip clip;
-    public float volume=1;
+    public float volume = 1;
 
     void Start()
     {

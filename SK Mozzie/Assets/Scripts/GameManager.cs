@@ -4,13 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Audio;
 
-public class GameSettingsData
-{
-    public float volumeBGM = 100;
-    public float volumeSFX = 100;
-    public float volumeNarration = 100;
-}
-
 [System.Serializable]
 public class CameraData
 {
@@ -24,45 +17,28 @@ public class CameraData
     }
 }
 
-[System.Serializable]
-public struct PlayerRaidalDistance
-{
-    public Transform centerPos; 
-    public float radius; 
-
-    public bool OutsideRadius(Vector3 position)
-    {
-        Vector3 centre = centerPos.position;
-        Vector3 player = position;
-        Vector3 distanceVec = centre - player;
-        Vector3 unitVec = distanceVec.normalized;
-        if( distanceVec.magnitude >= (radius * unitVec).magnitude)
-        {
-            return true; 
-        }
-
-        return false;
-    }
-}
-
 public class GameManager : MonoBehaviour
 {
     public const string UI_SCENE_NAME = "_UI";
-    private GameSettingsData gameSettingsData; 
-    static GameManager _instance;
-    public PlayerController playerC; 
-    public Audio_GameSFXSystem _gameSFXSys;
     [HideInInspector] public AttackVisualisation attackVisualisation;
+    static GameManager _instance;
+    GMAudioManagement audioManager;
+    public PlayerController playerC;
     public CameraData[] cameraData;
     public List<TargetController> Targets;
-    public int targetDataIndex = 0; 
+    public int targetDataIndex = 0;
     public PlayerRaidalDistance playerRaidusWorld;
-    public bool PlayerIntroComplete = false; 
+    public bool PlayerIntroComplete = false;
 
+    #region Singleton. 
     public static GameManager Instance => _instance;
+    #endregion
+
+    #region Player Properties. 
     public Vector3 PlayerPosition { get => playerC.Position; }
     public PlayerState DisablePlayer { set => Instance.playerC.SetPlayerState = value; }
-    public string KillTagLine { set => UIManager.Instance.SetTargetKillLine = value; }
+
+    #endregion
 
     public void OnEnable()
     {
@@ -76,34 +52,14 @@ public class GameManager : MonoBehaviour
             DestroyImmediate(this.gameObject);
         }
 
-        //Generate game settings data. 
-
-        gameSettingsData = new GameSettingsData()
-        {
-            volumeBGM = 50,
-            volumeSFX = 50,
-            volumeNarration = 50
-        };
-    }
-
-    public void PlaySoundAt(Vector3 position, AudioClip clip, SFX_Data data)
-    {
-        _gameSFXSys.PlayClip(clip, position, data);
-    }
-
-    internal void LoadUI()
-    {
-        SceneManager.LoadSceneAsync(UI_SCENE_NAME, LoadSceneMode.Additive);
+        //Generate Audio Setup. 
+        audioManager = new GMAudioManagement(); 
     }
 
     void Start()
     {
 
     }
-
-    //Current outside zone damange. 
-    public float playerDeathSpeed = 0.55f;
-    public float currentTimeOutside = 0; 
 
     void Update()
     {
@@ -115,39 +71,70 @@ public class GameManager : MonoBehaviour
 
         UpdateWorldRadius();
 
-        if(PlayerIntroComplete == true)
+        if (PlayerIntroComplete == true)
         {
             SetInitalTarget();
         }
     }
 
-    private void UpdateWorldRadius()
+    #region Level Loading. 
+    public void LoadLevel(string name)
     {
-        //Player zone Detection. 
-        bool playerOutsideZone = playerRaidusWorld.OutsideRadius(playerC.Position);
-        float intensity = 100 / playerDeathSpeed;
+        //Clear audio. 
+        audioManager.ClearBGM();
+        audioManager.ClearSFX();
 
-        if (playerOutsideZone)
-        {
-            currentTimeOutside += Time.deltaTime;
+        //Load the scene. 
+        SceneManager.LoadScene(name);
 
-            //Update shader
-            attackVisualisation.SetColor(ColorType.FAILURE);
-            attackVisualisation.VignetteIntensity = intensity * currentTimeOutside;
-            attackVisualisation.SetPostProcessingSettings();
-
-            if (currentTimeOutside >= playerDeathSpeed)
-                LoadLevel("MainMenu");
-        }
-
-        if (currentTimeOutside > 0 && !playerOutsideZone)
-        {
-            currentTimeOutside = 0;
-            attackVisualisation.VignetteIntensity = 0;
-            attackVisualisation.SetPostProcessingSettings();
-        }
+        if (name == "Main_Scene")
+            LoadUI();
     }
 
+    #endregion
+
+    #region Draw Gizmos. 
+    public void OnDrawGizmos()
+    {
+        Color color = Color.green;
+        color.a = 0.5F;
+        Gizmos.color = color;
+        if (playerRaidusWorld.centerPos != null)
+            Gizmos.DrawSphere(playerRaidusWorld.centerPos.position, playerRaidusWorld.radius);
+    }
+    #endregion
+
+    #region Target Handling. 
+    public void SetInitalTarget()
+    {
+        targetDataIndex = 0;
+        Targets[targetDataIndex].SetActive();
+    }
+
+    public void SetNextTarget()
+    {
+        targetDataIndex++;
+        if (targetDataIndex >= Targets.Count)
+        {
+            Debug.Log("Game Completed");
+            //Resolve game complete. 
+        }
+        else
+        {
+            Targets[targetDataIndex].SetActive();
+        }
+    }
+    #endregion
+
+    #region World Radius. 
+    private void UpdateWorldRadius()
+    {
+        if (playerRaidusWorld.UpdateRadius(playerC.Position))
+            LoadLevel("MainMenu");
+    }
+    #endregion
+
+    #region Camera. 
     public void SwitchCamera(string name)
     {
         foreach (CameraData item in cameraData)
@@ -159,42 +146,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetInitalTarget()
+    #endregion
+
+    #region UI. 
+
+    internal void LoadUI()
     {
-        targetDataIndex = 0;
-        Targets[targetDataIndex].SetActive();
+        SceneManager.LoadSceneAsync(UI_SCENE_NAME, LoadSceneMode.Additive);
     }
 
-    public void SetNextTarget()
+    public string KillTagLine { set => UIManager.Instance.SetTargetKillLine = value; }
+
+    #endregion
+
+    #region Audio Management.
+
+    public GameBGM AddBGM
     {
-        targetDataIndex++; 
-        if(targetDataIndex >= Targets.Count)
-        {
-            Debug.Log("Game Completed");
-            //Resolve game complete. 
-        }
-        else
-        {
-            Targets[targetDataIndex].SetActive();
-        }
+        set => audioManager.AddBGM(value);
     }
 
-    public void LoadLevel(string name)
+    public void PlaySoundFXAt(Vector3 position, AudioClip clip, SFX_Data data)
     {
-
-        SceneManager.LoadScene(name);
-        if(name == "Main_Scene")
-        {
-            LoadUI();
-        }
+        audioManager.PlaySFXSoundAt(position, clip, data);
     }
 
-    public void OnDrawGizmos()
+    public void PlayUISFX(AudioClip clip)
     {
-        Color color = Color.green;
-        color.a = 0.5F;
-        Gizmos.color = color;
-        if(playerRaidusWorld.centerPos != null)
-            Gizmos.DrawSphere(playerRaidusWorld.centerPos.position, playerRaidusWorld.radius);
+        audioManager.PlayUISFX(clip);
     }
+    #endregion
 }

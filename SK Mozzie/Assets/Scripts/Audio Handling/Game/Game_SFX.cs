@@ -149,14 +149,14 @@ public class Game_SFX : MonoBehaviour
 
     private IEnumerator IntervalTimer()
     {
-        GameManager.Instance.PlaySoundAt(gameObject.transform.position, clip, data);
+        GameManager.Instance.PlaySoundFXAt(gameObject.transform.position, clip, data);
         yield return new WaitForSeconds(intervalTime);
         StartCoroutine(IntervalTimer());
     }
 
     public void PlaySound()
     {
-        GameManager.Instance.PlaySoundAt(gameObject.transform.position, clip, data);
+        GameManager.Instance.PlaySoundFXAt(gameObject.transform.position, clip, data);
         gameObject.SetActive(false);
     }
 

@@ -9,6 +9,7 @@ namespace Audio
     {
         private SFX_Data data;
         private bool playing = false;
+        private float maxVolume; 
 
         /// <summary>
         /// Accessor for the current position of the audio source. 
@@ -17,6 +18,14 @@ namespace Audio
         {
             get => gameObject.transform.position;
             set => gameObject.transform.position = value;
+        }
+
+        /// <summary>
+        /// The allowed maximum volume. 
+        /// </summary>
+        public float EffectMaxVolume
+        {
+            set => maxVolume = value;
         }
 
         /// <summary>
@@ -43,11 +52,11 @@ namespace Audio
         /// <param name="position"> The position the clip should be played at. </param>
         /// <param name="clip"> The clip to play at said position. </param>
         /// <param name="data"> The data to assign to the audiosource. </param>
-        public override void PlayClip(Vector3 position, AudioClip clip, SFX_Data data)
+        public override void PlayClip(Vector3 position, AudioClip clip, SFX_Data data, float maxVolume)
         {
             gameObject.transform.position = position;
             this.data = data;
-            PlayClip(clip, data);
+            PlayClip(clip, data, maxVolume);
         }
 
         /// <summary>
@@ -55,10 +64,11 @@ namespace Audio
         /// </summary>
         /// <param name="clip"> The clip to be played. </param>
         /// <param name="data"> The data to assign to the audio source. </param>
-        public void PlayClip(AudioClip clip, SFX_Data data)
+        public void PlayClip(AudioClip clip, SFX_Data data, float maxVolume)
         {
             RemainingTime = clip.length;
             this.data = data;
+            this.maxVolume = maxVolume; 
 
             if (data.playLooped)
             {
@@ -82,19 +92,26 @@ namespace Audio
             //Calulate the distance between the player and the item.
             float dist = Vector3.Distance(transform.position, GameManager.Instance.PlayerPosition);
 
+            float vol;
+
             //Resolve the volume settings. 
             if (dist < data.minDist)
             {
-                source.volume = 1;
+                vol = 1;
             }
             else if (dist > data.maxDist)
             {
-                source.volume = 0;
+                vol = 0;
             }
             else
             {
-                source.volume = Mathf.Clamp(1 - ((dist - data.minDist) / (data.maxDist - data.minDist)), data.minVol, data.maxVol);
+                vol = Mathf.Clamp(1 - ((dist - data.minDist) / (data.maxDist - data.minDist)), data.minVol, data.maxVol);
             }
+
+            if (vol > maxVolume)
+                vol = maxVolume;
+
+            source.volume = vol; 
 
             //Call the base upates. 
             base.Update();

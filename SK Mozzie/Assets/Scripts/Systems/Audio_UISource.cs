@@ -41,10 +41,10 @@ namespace UI.Audio
         /// <param name="position"> The position the clip should be played at. </param>
         /// <param name="clip"> The clip to play at said position. </param>
         /// <param name="data"> The data to assign to the audiosource. </param>
-        public override void PlayClip(Vector3 position, AudioClip clip, SFX_Data data)
+        public override void PlayClip(Vector3 position, AudioClip clip, SFX_Data data, float maxVolume)
         {
             gameObject.transform.position = position;
-            PlayClip(clip);
+            PlayClip(clip, maxVolume);
         }
 
         /// <summary>
@@ -52,9 +52,10 @@ namespace UI.Audio
         /// </summary>
         /// <param name="clip"> The clip to be played. </param>
         /// <param name="data"> The data to assign to the audio source. </param>
-        public void PlayClip(AudioClip clip)
+        public void PlayClip(AudioClip clip, float maxVolume)
         {
             RemainingTime = clip.length;
+            source.volume = maxVolume;
             source.PlayOneShot(clip);
             playing = true;
         }

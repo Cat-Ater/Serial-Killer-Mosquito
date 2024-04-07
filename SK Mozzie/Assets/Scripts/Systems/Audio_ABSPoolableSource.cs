@@ -34,6 +34,6 @@ namespace Audio
             }
         }
 
-        public abstract void PlayClip(Vector3 position, AudioClip clip, SFX_Data data);
+        public abstract void PlayClip(Vector3 position, AudioClip clip, SFX_Data data, float maxVolume);
     }
 }

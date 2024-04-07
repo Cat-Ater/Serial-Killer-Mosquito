@@ -6,7 +6,6 @@ using UI;
 using UI.Audio;
 
 [RequireComponent(typeof(UI_DialogueDisplay))]
-[RequireComponent(typeof(Audio_UISFXManager))]
 public class UIManager : MonoBehaviour
 {
     /// <summary>
@@ -21,10 +20,6 @@ public class UIManager : MonoBehaviour
     /// Reference to the current UI target display. 
     /// </summary>
     public UI_TargetDisplay _targetDisplay;
-    /// <summary>
-    /// Reference to the current UI Audio Manager. 
-    /// </summary>
-    public Audio_UISFXManager _audioManager;
     /// <summary>
     /// Reference to the pause menu controller. 
     /// </summary>
@@ -44,7 +39,7 @@ public class UIManager : MonoBehaviour
     #region Audio.
     public static AudioClip PlaySound
     {
-        set => _instance._audioManager.PlayClip(value, _instance.transform.position);
+        set => GameManager.Instance.PlayUISFX(value);
     }
     #endregion
 
