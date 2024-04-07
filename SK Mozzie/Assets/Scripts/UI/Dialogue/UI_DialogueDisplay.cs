@@ -110,10 +110,21 @@ namespace UI.System
             //Set the characters name: 
             textOutput.name = line.name;
 
+            int rand = RandomRange(); 
+            
             while (DisplayStr.Length < line.TextLength && _dialogueState != UI_DialogueState.SCROLL_INTERUPT)
             {
                 DisplayStr += line.text[_charIndex];
-                UIManager.PlaySound = dialogueData.textTypeSFX;
+
+                //Check if should play sound. 
+                rand--;
+
+                if(rand <= 0)
+                {
+                    UIManager.PlaySound = dialogueData.textTypeSFX;
+                    rand = 10; 
+                }
+
                 yield return new WaitForSeconds(perCharSpeed);
                 _charIndex++;
             }
@@ -123,6 +134,11 @@ namespace UI.System
                 DisplayStr = line.text;
 
             _dialogueState = UI_DialogueState.LINE_WAIT;
+        }
+
+        private int RandomRange()
+        {
+            return Random.Range(8, 10);
         }
     }
 }

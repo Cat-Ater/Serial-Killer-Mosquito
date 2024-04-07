@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2726125680697961490}
   - component: {fileID: 7719019489871085981}
-  - component: {fileID: 2372515753691876594}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,9 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0ba8bd51e926e4782a266e4fe9ce8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerC: {fileID: 0}
-  _gameSFXSys: {fileID: 2372515753691876594}
   attackVisualisation: {fileID: 0}
+  playerC: {fileID: 0}
   cameraData:
   - camera: {fileID: 0}
     name: Main
@@ -60,20 +58,7 @@ MonoBehaviour:
   playerRaidusWorld:
     centerPos: {fileID: 0}
     radius: 150
+    outsideRadius: 0
+    maxTimeOutside: 0.55
+    timeOutside: 0
   PlayerIntroComplete: 0
-  playerDeathSpeed: 0.55
-  currentTimeOutside: 0
---- !u!114 &2372515753691876594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6978913458911977891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d8981db30e960048922f0dce12a5c85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prepopulationCount: 5
-  sources: []
