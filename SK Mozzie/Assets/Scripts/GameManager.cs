@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Audio;
+using Unity.Mathematics;
 
 [System.Serializable]
 public class CameraData
@@ -174,6 +175,15 @@ public class GameManager : MonoBehaviour
     public void PlayUISFX(AudioClip clip)
     {
         audioManager.PlayUISFX(clip);
+    }
+
+    public void SetVolumeLevels(float sfxVolume, float BGMVolume)
+    {
+        float remapBGM = math.remap(0, 100, 0, 1, BGMVolume);
+        float remapSFX = math.remap(0, 100, 0, 1, sfxVolume);
+
+        audioManager.SetBGMVolume(remapBGM);
+        audioManager.SetSFXVolume(remapSFX);
     }
     #endregion
 }
