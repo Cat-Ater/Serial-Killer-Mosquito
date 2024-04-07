@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class StartupLoader : MonoBehaviour
 {
 
-    public GameObject gamemangerPrefab; 
+    public GameObject gamemangerPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class StartupLoader : MonoBehaviour
 
     private IEnumerator TransitionTimer()
     {
-        yield return new WaitForSeconds(10F);
+        yield return new WaitForSeconds(15F);
         GameManager.Instance.LoadLevel("MainMenu");
     }
 }

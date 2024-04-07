@@ -194,7 +194,7 @@ PrefabInstance:
     - target: {fileID: 7719019489871085981, guid: fc708a1b01aeef24c87699cfa1559c1a, type: 3}
       propertyPath: Targets.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1496393091}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -212,6 +212,10 @@ PrefabInstance:
       propertyPath: field of view
       value: 58
       objectReference: {fileID: 0}
+    - target: {fileID: 538181847713666167, guid: d241c4a390322624b95b112d8313b102, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 889763478244876477, guid: d241c4a390322624b95b112d8313b102, type: 3}
       propertyPath: m_Name
       value: Player
@@ -226,31 +230,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3151054870605938808, guid: d241c4a390322624b95b112d8313b102, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -48.193
       objectReference: {fileID: 0}
     - target: {fileID: 3151054870605938808, guid: d241c4a390322624b95b112d8313b102, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.205
+      value: -0.7473
       objectReference: {fileID: 0}
     - target: {fileID: 3151054870605938808, guid: d241c4a390322624b95b112d8313b102, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 6.03
       objectReference: {fileID: 0}
     - target: {fileID: 3151054870605938808, guid: d241c4a390322624b95b112d8313b102, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.6913492
       objectReference: {fileID: 0}
     - target: {fileID: 3151054870605938808, guid: d241c4a390322624b95b112d8313b102, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3151054870605938808, guid: d241c4a390322624b95b112d8313b102, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.72252077
       objectReference: {fileID: 0}
     - target: {fileID: 3151054870605938808, guid: d241c4a390322624b95b112d8313b102, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3151054870605938808, guid: d241c4a390322624b95b112d8313b102, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -258,7 +262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3151054870605938808, guid: d241c4a390322624b95b112d8313b102, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -92.526
       objectReference: {fileID: 0}
     - target: {fileID: 3151054870605938808, guid: d241c4a390322624b95b112d8313b102, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -302,8 +306,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueData:
     lines:
-    - name: Testy
+    - name: Roger
       text: Test Test Test
+      speedOfLine: 0.5
+    - name: Roger
+      text: Test Test Test1
+      speedOfLine: 0.5
+    - name: Roger
+      text: Test Test Test2
       speedOfLine: 0.5
     textOpenSFX: {fileID: 8300000, guid: 0feef00a8347c984589a07bb9c1e71db, type: 3}
     textCloseSFX: {fileID: 8300000, guid: 0feef00a8347c984589a07bb9c1e71db, type: 3}
@@ -446,6 +456,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 460625835800793122, guid: 860f352fd1f9a48419a7be51c48cf51f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.15
+      objectReference: {fileID: 0}
     - target: {fileID: 7397821111277872520, guid: 860f352fd1f9a48419a7be51c48cf51f, type: 3}
       propertyPath: m_LocalPosition.y
       value: -2.49
@@ -930,6 +944,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3272699903298059116, guid: 516b740aaabaa7848aa0bd196bb9f982, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1496393087}
+    - targetCorrespondingSourceObject: {fileID: 3272699903298059116, guid: 516b740aaabaa7848aa0bd196bb9f982, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1496393095}
   m_SourcePrefab: {fileID: 100100000, guid: 516b740aaabaa7848aa0bd196bb9f982, type: 3}
 --- !u!1 &1496393085 stripped
 GameObject:
@@ -1075,6 +1092,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1496393091 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5077001211200687069, guid: 516b740aaabaa7848aa0bd196bb9f982, type: 3}
+  m_PrefabInstance: {fileID: 1496393084}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496393085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d9e8f9a4d6804f44b3069120d3f20c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1496393095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496393085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ddd33eae28b5148a72170d47ccd942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueData:
+    lines:
+    - name: Steve
+      text: What the hell is that?
+      speedOfLine: 1
+    textOpenSFX: {fileID: 0}
+    textCloseSFX: {fileID: 0}
+    textTypeSFX: {fileID: 0}
+    textSkipSFX: {fileID: 0}
 --- !u!1 &1896391654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,6 +1487,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5328409058679327344, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5102174263878351236}
+    - targetCorrespondingSourceObject: {fileID: 5328409058679327344, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5102174263878351237}
   m_SourcePrefab: {fileID: 100100000, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
 --- !u!1 &5102174263878351232 stripped
 GameObject:
@@ -1583,3 +1635,27 @@ MonoBehaviour:
   audioClipArray:
   - {fileID: 8300000, guid: 7d5f7a82526c46042a5cf3351ce136fb, type: 3}
   timeBetweenShots: 8
+--- !u!114 &5102174263878351237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102174263878351232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ddd33eae28b5148a72170d47ccd942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueData:
+    lines:
+    - name: Slobber
+      text: test
+      speedOfLine: 1
+    - name: Slobber
+      text: test2
+      speedOfLine: 1
+    textOpenSFX: {fileID: 0}
+    textCloseSFX: {fileID: 0}
+    textTypeSFX: {fileID: 0}
+    textSkipSFX: {fileID: 0}
