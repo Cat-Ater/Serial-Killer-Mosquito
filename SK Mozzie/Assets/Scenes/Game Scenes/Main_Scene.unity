@@ -907,9 +907,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3272699903298059116, guid: 516b740aaabaa7848aa0bd196bb9f982, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2079279069}
-    - targetCorrespondingSourceObject: {fileID: 3272699903298059116, guid: 516b740aaabaa7848aa0bd196bb9f982, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1496393102}
   m_SourcePrefab: {fileID: 100100000, guid: 516b740aaabaa7848aa0bd196bb9f982, type: 3}
 --- !u!1 &1496393085 stripped
 GameObject:
@@ -933,10 +930,10 @@ MonoBehaviour:
     - name: Steve
       text: What the hell is that?
       speedOfLine: 1
-    textOpenSFX: {fileID: 8300000, guid: a400495153fb6e144bee856c3e78b0c4, type: 3}
-    textCloseSFX: {fileID: 8300000, guid: a400495153fb6e144bee856c3e78b0c4, type: 3}
-    textTypeSFX: {fileID: 8300000, guid: a400495153fb6e144bee856c3e78b0c4, type: 3}
-    textSkipSFX: {fileID: 8300000, guid: a400495153fb6e144bee856c3e78b0c4, type: 3}
+    textOpenSFX: {fileID: 8300000, guid: 921ab46e3fb9da04e93a1db90420d39c, type: 3}
+    textCloseSFX: {fileID: 8300000, guid: 6117129d15706eb47aa4adaa6828538f, type: 3}
+    textTypeSFX: {fileID: 8300000, guid: 2e2ec12e662e3174493457088410d06b, type: 3}
+    textSkipSFX: {fileID: 8300000, guid: 505483ab299ceb746a54695c0a184397, type: 3}
     pausePlayer: 0
     skipEnabled: 0
 --- !u!114 &1496393100
@@ -974,27 +971,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1496393102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496393085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08cacadc25ceaf84893587e0e64975c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    PlayWhen: 7
-    minDist: 1
-    maxDist: 6
-    minVol: 0
-    maxVol: 1
-    playLooped: 0
-  clip: {fileID: 8300000, guid: 12a6f812436ef254fb9df88c1a56b0d7, type: 3}
-  intervalTime: 0
 --- !u!1 &1651855621 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1190214399211797217, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
@@ -1179,7 +1155,7 @@ MonoBehaviour:
   data:
     PlayWhen: 0
     minDist: 1
-    maxDist: 400
+    maxDist: 6
     minVol: 0
     maxVol: 1
     playLooped: 0
@@ -1200,7 +1176,7 @@ MonoBehaviour:
   data:
     PlayWhen: 15
     minDist: 1
-    maxDist: 400
+    maxDist: 6
     minVol: 0
     maxVol: 1
     playLooped: 0
@@ -1565,6 +1541,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5328409058679327344, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5102174263878351242}
+    - targetCorrespondingSourceObject: {fileID: 5328409058679327344, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5102174263878351243}
     - targetCorrespondingSourceObject: {fileID: 1190214399211797217, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1651855622}
@@ -1577,6 +1556,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5328409058679327344, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
   m_PrefabInstance: {fileID: 5102174263878351231}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5102174263878351233 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3486595355973026529, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
+  m_PrefabInstance: {fileID: 5102174263878351231}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102174263878351232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d9e8f9a4d6804f44b3069120d3f20c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &5102174263878351235
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1766,3 +1756,24 @@ MonoBehaviour:
     playLooped: 0
   clip: {fileID: 8300000, guid: 7d5f7a82526c46042a5cf3351ce136fb, type: 3}
   intervalTime: 8
+--- !u!114 &5102174263878351243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102174263878351232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf368f2b10c910d4baaeecedef3d17a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    PlayWhen: 0
+    minDist: 1
+    maxDist: 6
+    minVol: 0
+    maxVol: 1
+    playLooped: 0
+  clip: {fileID: 8300000, guid: 61f9fe89771aa06439e6e0865e5587af, type: 3}
+  targetData: {fileID: 5102174263878351233}
