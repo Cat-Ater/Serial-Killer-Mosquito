@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -248,7 +248,7 @@ MonoBehaviour:
       speedOfLine: 1
     textOpenSFX: {fileID: 8300000, guid: 921ab46e3fb9da04e93a1db90420d39c, type: 3}
     textCloseSFX: {fileID: 8300000, guid: 6117129d15706eb47aa4adaa6828538f, type: 3}
-    textTypeSFX: {fileID: 8300000, guid: 3137bb3a2105f8a45914ba5fc70f0099, type: 3}
+    textTypeSFX: {fileID: 8300000, guid: d27e00d0718dc92458194fde064ac456, type: 3}
     textSkipSFX: {fileID: 8300000, guid: 505483ab299ceb746a54695c0a184397, type: 3}
     pausePlayer: 1
     skipEnabled: 1
@@ -790,9 +790,9 @@ MonoBehaviour:
     - name: Steve
       text: What the hell is that?
       speedOfLine: 1
-    textOpenSFX: {fileID: 8300000, guid: 8a6241b75b219404d8f8a7ae70682117, type: 3}
+    textOpenSFX: {fileID: 8300000, guid: 921ab46e3fb9da04e93a1db90420d39c, type: 3}
     textCloseSFX: {fileID: 8300000, guid: 6117129d15706eb47aa4adaa6828538f, type: 3}
-    textTypeSFX: {fileID: 8300000, guid: 3137bb3a2105f8a45914ba5fc70f0099, type: 3}
+    textTypeSFX: {fileID: 8300000, guid: 1c21b8f50db4b03409a1ad01fa23ff54, type: 3}
     textSkipSFX: {fileID: 8300000, guid: 505483ab299ceb746a54695c0a184397, type: 3}
     pausePlayer: 0
     skipEnabled: 0
@@ -950,7 +950,7 @@ MonoBehaviour:
   data:
     PlayWhen: 15
     minDist: 1
-    maxDist: 6
+    maxDist: 8
     minVol: 0
     maxVol: 1
     playLooped: 0
@@ -1313,6 +1313,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5328409058679327344, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5102174263878351243}
+    - targetCorrespondingSourceObject: {fileID: 5328409058679327344, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5102174263878351244}
   m_SourcePrefab: {fileID: 100100000, guid: e2850eda0fe31d749a470714b0d7a118, type: 3}
 --- !u!1 &5102174263878351232 stripped
 GameObject:
@@ -1463,9 +1466,9 @@ MonoBehaviour:
     - name: Slobber
       text: Woof?
       speedOfLine: 1
-    textOpenSFX: {fileID: 8300000, guid: 7d5f7a82526c46042a5cf3351ce136fb, type: 3}
+    textOpenSFX: {fileID: 8300000, guid: 921ab46e3fb9da04e93a1db90420d39c, type: 3}
     textCloseSFX: {fileID: 8300000, guid: 6117129d15706eb47aa4adaa6828538f, type: 3}
-    textTypeSFX: {fileID: 8300000, guid: 3137bb3a2105f8a45914ba5fc70f0099, type: 3}
+    textTypeSFX: {fileID: 8300000, guid: ccd56c64896b4ca4ea93702bf0a12446, type: 3}
     textSkipSFX: {fileID: 8300000, guid: 505483ab299ceb746a54695c0a184397, type: 3}
     pausePlayer: 0
     skipEnabled: 0
@@ -1482,11 +1485,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    PlayWhen: 15
+    PlayWhen: 0
     minDist: 1
     maxDist: 6
     minVol: 0
     maxVol: 1
     playLooped: 0
-  clip: {fileID: 8300000, guid: 61f9fe89771aa06439e6e0865e5587af, type: 3}
+  clip: {fileID: 8300000, guid: 429aa2d49c60aa145b45c6ec41507cc0, type: 3}
   targetData: {fileID: 5102174263878351233}
+--- !u!114 &5102174263878351244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102174263878351232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08cacadc25ceaf84893587e0e64975c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    PlayWhen: 15
+    minDist: 1
+    maxDist: 7
+    minVol: 0
+    maxVol: 1
+    playLooped: 0
+  clip: {fileID: 8300000, guid: 9f7498630e8da5348873cc6d92f48155, type: 3}
+  intervalTime: 7
