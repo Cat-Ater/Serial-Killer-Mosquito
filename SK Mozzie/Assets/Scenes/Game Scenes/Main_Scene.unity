@@ -385,7 +385,7 @@ MonoBehaviour:
       speedOfLine: 1
     textOpenSFX: {fileID: 8300000, guid: 921ab46e3fb9da04e93a1db90420d39c, type: 3}
     textCloseSFX: {fileID: 8300000, guid: 6117129d15706eb47aa4adaa6828538f, type: 3}
-    textTypeSFX: {fileID: 8300000, guid: a400495153fb6e144bee856c3e78b0c4, type: 3}
+    textTypeSFX: {fileID: 8300000, guid: 0aa4e4bed5943eb44acaf27f3eebee49, type: 3}
     textSkipSFX: {fileID: 8300000, guid: 505483ab299ceb746a54695c0a184397, type: 3}
     pausePlayer: 1
     skipEnabled: 1
@@ -1718,10 +1718,10 @@ MonoBehaviour:
     - name: Slobber
       text: test2
       speedOfLine: 1
-    textOpenSFX: {fileID: 8300000, guid: a400495153fb6e144bee856c3e78b0c4, type: 3}
-    textCloseSFX: {fileID: 8300000, guid: a400495153fb6e144bee856c3e78b0c4, type: 3}
-    textTypeSFX: {fileID: 8300000, guid: a400495153fb6e144bee856c3e78b0c4, type: 3}
-    textSkipSFX: {fileID: 8300000, guid: a400495153fb6e144bee856c3e78b0c4, type: 3}
+    textOpenSFX: {fileID: 8300000, guid: 921ab46e3fb9da04e93a1db90420d39c, type: 3}
+    textCloseSFX: {fileID: 8300000, guid: 6117129d15706eb47aa4adaa6828538f, type: 3}
+    textTypeSFX: {fileID: 8300000, guid: d5e826bde27af754cb012091f1a6e25e, type: 3}
+    textSkipSFX: {fileID: 8300000, guid: 505483ab299ceb746a54695c0a184397, type: 3}
     pausePlayer: 0
     skipEnabled: 0
 --- !u!95 &5102174263878351241
@@ -1758,9 +1758,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    PlayWhen: 0
+    PlayWhen: 15
     minDist: 1
-    maxDist: 400
+    maxDist: 5
     minVol: 0
     maxVol: 1
     playLooped: 0
