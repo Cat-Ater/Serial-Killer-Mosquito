@@ -21,9 +21,12 @@ namespace Audio
 
             public void UpdateVolume(float volume)
             {
-                foreach (GameBGM item in BGM)
+                if(BGM.Count > 0)
                 {
-                    item.AdjustMaxVolume(volume);
+                    foreach (GameBGM item in BGM)
+                    {
+                        item.AdjustMaxVolume(volume);
+                    }
                 }
             }
 
