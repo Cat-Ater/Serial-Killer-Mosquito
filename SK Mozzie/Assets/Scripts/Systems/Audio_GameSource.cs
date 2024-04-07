@@ -7,7 +7,7 @@ namespace Audio
     /// </summary>
     public class Audio_GameSource : Audio_ABSPoolableSource
     {
-        private SFX_Data data; 
+        private SFX_Data data;
         private bool playing = false;
 
         /// <summary>
@@ -59,14 +59,24 @@ namespace Audio
         {
             RemainingTime = clip.length;
             this.data = data;
-            source.PlayOneShot(clip);
-            playing = true;
+
+            if (data.playLooped)
+            {
+                source.loop = true;
+                source.clip = clip;
+                source.Play();
+            }
+            else
+            {
+                source.PlayOneShot(clip);
+                playing = true;
+            }
         }
 
         internal override void Update()
         {
             //If the audio clip is not playing return. 
-            if (!playing)
+            if (!playing || data.playLooped)
                 return;
 
             //Calulate the distance between the player and the item.

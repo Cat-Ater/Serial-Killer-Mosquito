@@ -19,5 +19,6 @@ public class PlayerInitalDialogue : MonoBehaviour, IDialogueCaller
     public void DisplayComplete()
     {
         Debug.Log("Inital Dialogue Display: Complete.");
+        GameManager.Instance.PlayerIntroComplete = true; 
     }
 }

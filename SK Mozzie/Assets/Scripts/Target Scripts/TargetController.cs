@@ -6,14 +6,24 @@ using UnityEngine;
 public class TargetController : MonoBehaviour
 {
     public TargetData targetData;
+    public bool active = false;
 
-    void Start()
+    public void Start()
     {
-
+        GameManager.Instance.Targets.Add(this);
     }
 
-    void Update()
+    public void SetActive()
     {
+        active = true; 
+    }
 
+    public void Update()
+    {
+        if (targetData.IsDead)
+        {
+            active = false; 
+            GameManager.Instance.SetNextTarget();
+        }
     }
 }

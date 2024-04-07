@@ -15,6 +15,11 @@ public enum GameSFXPlayPoint
     TRIGGER_EXIT_PLAYER,
     COLLISION_ENTER_PLAYER,
     COLLISION_EXIT_PLAYER,
+    REPEATED_INTERVAL_COLLISION_ENTER,
+    REPEATED_INTERVAL_COLLISION_EXIT,
+    REPEATED_INTERVAL_TRIGGER_ENTER,
+    REPEATED_INTERVAL_TRIGGER_EXIT,
+    INTERVAL
 }
 
 [System.Serializable]
@@ -30,6 +35,7 @@ public class SFX_Data
     public float minVol = 0;
     [Header("The maximum volume at which the audio should be played.")]
     public float maxVol = 1;
+    public bool playLooped = false;
 
     public bool IsPlayerBound
     {
@@ -70,7 +76,7 @@ public class Game_SFX : MonoBehaviour
 {
     public SFX_Data data;
     public AudioClip clip;
-
+    public float intervalTime;
     private bool IsPlayer(GameObject obj)
     {
         if (obj.gameObject.tag != "Player")
@@ -82,6 +88,9 @@ public class Game_SFX : MonoBehaviour
     {
         if (data.PlayWhen == GameSFXPlayPoint.START)
             PlaySound();
+
+        if (data.PlayWhen == GameSFXPlayPoint.INTERVAL)
+            StartCoroutine(IntervalTimer());
     }
 
     public void OnDisable()
@@ -95,6 +104,11 @@ public class Game_SFX : MonoBehaviour
         if ((IsPlayer(other.gameObject) && data.PlayWhen == GameSFXPlayPoint.TRIGGER_ENTER_PLAYER) ||
             (data.PlayWhen == GameSFXPlayPoint.TRIGGER_ENTER))
             PlaySound();
+
+        if ((IsPlayer(other.gameObject) && data.PlayWhen == GameSFXPlayPoint.REPEATED_INTERVAL_TRIGGER_ENTER))
+        {
+            StartCoroutine(IntervalTimer());
+        }
     }
 
     public void OnTriggerExit(Collider other)
@@ -102,6 +116,11 @@ public class Game_SFX : MonoBehaviour
         if ((IsPlayer(other.gameObject) && data.PlayWhen == GameSFXPlayPoint.TRIGGER_EXIT_PLAYER) ||
             (data.PlayWhen == GameSFXPlayPoint.TRIGGER_EXIT))
             PlaySound();
+
+        if ((IsPlayer(other.gameObject) && data.PlayWhen == GameSFXPlayPoint.REPEATED_INTERVAL_TRIGGER_EXIT))
+        {
+            StartCoroutine(IntervalTimer());
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -109,6 +128,11 @@ public class Game_SFX : MonoBehaviour
         if ((IsPlayer(collision.gameObject) && data.PlayWhen == GameSFXPlayPoint.COLLISION_ENTER_PLAYER) ||
             (data.PlayWhen == GameSFXPlayPoint.COLLISION_ENTER))
             PlaySound();
+
+        if ((IsPlayer(collision.gameObject) && data.PlayWhen == GameSFXPlayPoint.REPEATED_INTERVAL_COLLISION_ENTER))
+        {
+            StartCoroutine(IntervalTimer());
+        }
     }
 
     public void OnCollisionExit(Collision collision)
@@ -116,6 +140,18 @@ public class Game_SFX : MonoBehaviour
         if ((IsPlayer(collision.gameObject) && data.PlayWhen == GameSFXPlayPoint.COLLISION_EXIT_PLAYER) ||
             (data.PlayWhen == GameSFXPlayPoint.COLLISION_EXIT))
             PlaySound();
+
+        if ((IsPlayer(collision.gameObject) && data.PlayWhen == GameSFXPlayPoint.REPEATED_INTERVAL_COLLISION_EXIT))
+        {
+            StartCoroutine(IntervalTimer());
+        }
+    }
+
+    private IEnumerator IntervalTimer()
+    {
+        GameManager.Instance.PlaySoundAt(gameObject.transform.position, clip, data);
+        yield return new WaitForSeconds(intervalTime);
+        StartCoroutine(IntervalTimer());
     }
 
     public void PlaySound()
