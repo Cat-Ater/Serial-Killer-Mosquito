@@ -81,7 +81,7 @@ namespace UI.System
                     _dialogueState = UI_DialogueState.INACTIVE;
 
                     //TODO: Implement this. 
-                    ///PlayerController.Instance.PlayerEnabled = true;
+                    //PlayerController.Instance.PlayerEnabled = true;
                     animator.SetBool("IsOpen", false);
                     _caller.DisplayComplete();
                     ResetState(false);
