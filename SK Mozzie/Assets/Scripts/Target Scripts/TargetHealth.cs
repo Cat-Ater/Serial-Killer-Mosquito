@@ -35,6 +35,7 @@ public class TargetHealth : MonoBehaviour
     public PostProssScaling vSmoothing;
     public PostProssScaling fgIntensity;
     public PostProssScaling fgResponse;
+    public float timeToKill = 0;
 
     private bool CanActivate => state == TargetHealthState.ALIVE;
 
@@ -46,7 +47,7 @@ public class TargetHealth : MonoBehaviour
             this.attack = attack;
         }
     }
-    public float timeToKill = 0;
+
     public void OnDrainCancel()
     {
         if (state != TargetHealthState.DEAD)
