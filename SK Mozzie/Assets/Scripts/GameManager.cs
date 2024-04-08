@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 using Audio;
 using Unity.Mathematics;
 
-public struct CurrentTargetState
+public struct TargetState
 {
     public bool idle, attacked, dead;
 
-    public CurrentTargetState(bool idle, bool attacked, bool dead)
+    public TargetState(bool idle, bool attacked, bool dead)
     {
         this.idle = idle;
         this.attacked = attacked;
@@ -30,6 +30,54 @@ public class CameraData
     }
 }
 
+public class TargetManager
+{
+    public List<TargetController> targets;
+    public int index = 0;
+    public bool systemActive;
+    public bool targetSelected;
+
+    public bool CanDisplayTarget => systemActive && targetSelected;
+    public bool TargetEnabled => targets[index].active;
+    public TargetDataStruct TargetData => targets[index].targetData.tData;
+    public TargetState CTargetState => targets[index].GetState();
+
+    public void SetTargets(List<TargetController> targetList)
+    {
+        this.targets = targetList;
+    }
+
+    public void InitalizeSystem()
+    {
+        if (targets != null)
+        {
+            index = 0;
+            targets[index].SetActive();
+            systemActive = true;
+        }
+        else
+        {
+            Debug.Log("No Target Data found.");
+        }
+    }
+
+    public void SelectNext()
+    {
+        targets[index].active = false;
+        index++;
+        if (index >= targets.Count)
+        {
+            Debug.Log("Game Completed");
+            //Resolve game complete. 
+            GameManager.Instance.LoadLevel("GameOver");
+        }
+        else
+        {
+            targets[index].SetActive();
+        }
+    }
+}
+
 public class GameManager : MonoBehaviour
 {
     public const string UI_SCENE_NAME = "_UI";
@@ -38,8 +86,7 @@ public class GameManager : MonoBehaviour
     GMAudioManagement audioManager;
     public PlayerController playerC;
     public CameraData[] cameraData;
-    public List<TargetController> Targets;
-    public int targetDataIndex = 0;
+    private TargetManager _targetManager;
     public PlayerRaidalDistance playerRaidusWorld;
     public bool PlayerIntroComplete = false;
 
@@ -47,17 +94,11 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => _instance;
     #endregion
 
+    public TargetManager TargetManager => _targetManager; 
+
     #region Player Properties. 
     public Vector3 PlayerPosition { get => playerC.Position; }
     public PlayerState PlayerMovement { set => Instance.playerC.SetPlayerState = value; }
-
-    public bool TargetSet => Targets[targetDataIndex].active;
-
-    public bool TargetEnabled { get; set; } = false;
-
-    public TargetDataStruct CurrentTargetData => Targets[targetDataIndex].targetData.tData;
-
-    public CurrentTargetState currentTargetState => Targets[targetDataIndex].GetState();
 
     #endregion
 
@@ -75,6 +116,7 @@ public class GameManager : MonoBehaviour
 
         //Generate Audio Setup. 
         audioManager = new GMAudioManagement();
+        _targetManager = new TargetManager();
     }
 
     void Start()
@@ -92,7 +134,12 @@ public class GameManager : MonoBehaviour
 
         if (PlayerIntroComplete == true)
         {
-            SetInitalTarget();
+            _targetManager.InitalizeSystem();
+        }
+
+        if(TargetManager.CTargetState.dead == true)
+        {
+            TargetManager.SelectNext(); 
         }
     }
 
@@ -122,31 +169,6 @@ public class GameManager : MonoBehaviour
         Gizmos.color = color;
         if (playerRaidusWorld.centerPos != null)
             Gizmos.DrawSphere(playerRaidusWorld.centerPos.position, playerRaidusWorld.radius);
-    }
-    #endregion
-
-    #region Target Handling. 
-
-    public void SetInitalTarget()
-    {
-        targetDataIndex = 0;
-        Targets[targetDataIndex].SetActive();
-        TargetEnabled = true;
-    }
-
-    public void SetNextTarget()
-    {
-        targetDataIndex++;
-        if (targetDataIndex >= Targets.Count)
-        {
-            Debug.Log("Game Completed");
-            //Resolve game complete. 
-            LoadLevel("GameOver");
-        }
-        else
-        {
-            Targets[targetDataIndex].SetActive();
-        }
     }
     #endregion
 

@@ -9,6 +9,6 @@ public class TargetList : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.Targets = targets; 
+        GameManager.Instance.TargetManager.SetTargets(targets); 
     }
 }

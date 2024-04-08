@@ -98,9 +98,9 @@ namespace UI
 
         private void Update()
         {
-            TargetDataStruct tData = GameManager.Instance.CurrentTargetData;
-            CurrentTargetState tState = GameManager.Instance.currentTargetState;
-            if (GameManager.Instance.TargetSet && GameManager.Instance.TargetEnabled)
+            TargetDataStruct tData = GameManager.Instance.TargetManager.TargetData;
+            TargetState tState = GameManager.Instance.TargetManager.CTargetState;
+            if (GameManager.Instance.TargetManager.systemActive && GameManager.Instance.TargetManager.TargetEnabled)
             {
                 InitData(ref tData);
                 UpdateData(tState.idle, tState.attacked, tState.dead);

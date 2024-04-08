@@ -13,17 +13,8 @@ public class TargetController : MonoBehaviour
         active = true; 
     }
 
-    public void Update()
+    public TargetState GetState()
     {
-        if (targetData.IsDead)
-        {
-            active = false; 
-            GameManager.Instance.SetNextTarget();
-        }
-    }
-
-    public CurrentTargetState GetState()
-    {
-        return new CurrentTargetState(targetData.playIdleAnim, targetData.playAttackAnim, targetData.playDeathAnim);
+        return new TargetState(targetData.playIdleAnim, targetData.playAttackAnim, targetData.playDeathAnim);
     }
 }
