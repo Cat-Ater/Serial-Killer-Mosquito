@@ -5,17 +5,52 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    private enum MenuState
+    {
+        INACTIVE,
+        ACTIVE,
+        SETTINGS_ACTIVE
+    }
+
+    private MenuState menuState = MenuState.INACTIVE;
+    public GameObject menuRoot;
+    public SettingsMenu settingsMenu;
+
+    public bool Open
+    {
+        get => menuRoot.activeSelf;
+        private set => menuRoot.SetActive(value);
+    }
+
     public void PlayIntro()
     {
         SceneManager.LoadScene(1);
         Cursor.lockState = CursorLockMode.None;
     }
+
     public void PlayGame()
     {
         SceneManager.LoadScene(2);
         Cursor.lockState = CursorLockMode.None;
     }
 
+    public void SettingsMenuOpen()
+    {
+        settingsMenu.PopulateData();
+
+        //Disable the main. 
+        Open = !(settingsMenu.Open = true);
+        menuState = MenuState.SETTINGS_ACTIVE;
+    }
+
+    public void SettingsMenuClose()
+    {
+        settingsMenu.PushData();
+
+        //Enable the main. 
+        Open = !(settingsMenu.Open = false);
+        menuState = MenuState.ACTIVE;
+    }
 
     public void QuitGame()
     {
