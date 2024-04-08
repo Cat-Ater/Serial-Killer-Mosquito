@@ -61,9 +61,6 @@ namespace UI
 
         private void UpdateMenuState(MenuState state)
         {
-            //Update the game time rate and player state. 
-            Time.timeScale = (Open) ? 0.1F : 1F;
-            GameManager.Instance.DisablePlayer = (Open) ? PlayerState.DISABLED : PlayerState.ENABLED;
 
             //Update open state.
             Open = !Open;
@@ -78,7 +75,7 @@ namespace UI
 
         public void State_Active()
         {
-
+            GameManager.Instance.PlayerMovement = PlayerState.DISABLED; 
         }
 
         public void State_Settings()
@@ -107,6 +104,12 @@ namespace UI
         public void MenuClose()
         {
             UpdateMenuState(MenuState.INACTIVE);
+            GameManager.Instance.PlayerMovement = PlayerState.ENABLED;
+        }
+
+        public void ReturnToMain()
+        {
+            GameManager.Instance.LoadMainMenu();
         }
     }
 }

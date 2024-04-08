@@ -105,6 +105,9 @@ public class PlayerMovementController : MonoBehaviour
 
     private void UpdateMovement()
     {
+        if (PlayerController.state == PlayerState.DISABLED)
+            return;
+
         float fwdSpeed = fwdHoverMomentumMax * Time.deltaTime;
         float upwardSpeed = hoverMaxSpeed * Time.deltaTime;
         Vector3 fwdVec = gameObject.transform.forward.normalized;
@@ -131,18 +134,19 @@ public class PlayerMovementController : MonoBehaviour
 
     private void UpdateRotation()
     {
+        if (PlayerController.state == PlayerState.DISABLED)
+            return;
+
         //Update rotation and camera positions. 
         gameObject.transform.rotation = Quaternion.identity * Quaternion.Euler(clampY.Current, clampX.Current, 0);
     }
 
     private void UpdateCamera()
     {
+        if (PlayerController.state == PlayerState.DISABLED)
+            return;
+
         //thirdPerson.transform.position = transform.position + cameraOffset;
         thirdPerson.transform.rotation = transform.rotation;
-    }
-
-    internal void CancelMovement()
-    {
-        body.velocity = Vector3.zero; 
     }
 }

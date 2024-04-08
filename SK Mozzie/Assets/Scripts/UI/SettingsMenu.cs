@@ -19,7 +19,7 @@ public class SettingsMenu : MonoBehaviour
     public void PopulateData()
     {
         //Pull current volume data. 
-        float unscaledBGM = GameManager.Instance.GetBGMVolume();
+        float unscaledBGM = GameManager.Instance. GetBGMVolume();
         float unscaledSFX = GameManager.Instance.GetSFXVolume();
 
         //Remap values. 

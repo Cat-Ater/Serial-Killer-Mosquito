@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     #region Player Properties. 
     public Vector3 PlayerPosition { get => playerC.Position; }
-    public PlayerState DisablePlayer { set => Instance.playerC.SetPlayerState = value; }
+    public PlayerState PlayerMovement { set => Instance.playerC.SetPlayerState = value; }
 
     #endregion
 
@@ -82,6 +82,8 @@ public class GameManager : MonoBehaviour
     }
 
     #region Level Loading. 
+    public void LoadMainMenu() => LoadLevel("MainMenu");
+
     public void LoadLevel(string name)
     {
         //Clear audio. 

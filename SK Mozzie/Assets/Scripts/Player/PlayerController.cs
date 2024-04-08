@@ -3,51 +3,38 @@ using UnityEngine;
 
 public enum PlayerState
 {
-    ENABLED, 
+    ENABLED,
     DISABLED
 }
 
 public class PlayerController : MonoBehaviour
 {
     public PlayerMovementController playerMovement;
-    public PlayerState state = PlayerState.ENABLED;
+    public static PlayerState state = PlayerState.ENABLED;
 
     public PlayerState SetPlayerState
     {
-        set
-        {
-            state = value; 
-            if(state == PlayerState.DISABLED)
-            {
-                playerMovement.CancelMovement();
-            }
-        }
+        set => state = value;
     }
 
     public Vector3 Position
     {
         get => transform.position;
-        set => transform.position = value; 
+        set => transform.position = value;
     }
 
     void Start()
     {
-        GameManager.Instance.playerC = this; 
+        GameManager.Instance.playerC = this;
     }
 
     void Update()
     {
-        if(state == PlayerState.ENABLED)
-        {
-            playerMovement.UpdateVolume();
-        }
+        playerMovement.UpdateVolume();
     }
 
     private void LateUpdate()
     {
-        if(state == PlayerState.ENABLED)
-        {
-            playerMovement.LUpdate();
-        }
+        playerMovement.LUpdate();
     }
 }

@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuRoot: {fileID: 1814782811}
+  settingsMenu: {fileID: 19155376}
 --- !u!114 &19155375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0fa0676c5f98e14aa673c66d1bf988a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsMenuRoot: {fileID: 1548365441259466766}
   musicSlider: {fileID: 754681585190725516}
   SoundEffectSlider: {fileID: 3493795893304123978}
 --- !u!1 &86514748
@@ -532,10 +534,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 19155374}
+        m_TargetAssemblyTypeName: UI.PauseMenuController, Assembly-CSharp
+        m_MethodName: ReturnToMain
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1874,9 +1876,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1132436655}
-        m_TargetAssemblyTypeName: DeactivatePauseMenu, Assembly-CSharp
-        m_MethodName: Deactivate
+      - m_Target: {fileID: 19155374}
+        m_TargetAssemblyTypeName: UI.PauseMenuController, Assembly-CSharp
+        m_MethodName: MenuClose
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2241,22 +2243,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1548365441259466766}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1814782811}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 19155374}
+        m_TargetAssemblyTypeName: UI.PauseMenuController, Assembly-CSharp
+        m_MethodName: SettingsMenuOpen
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6535,9 +6525,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9180642299650996280}
-        m_TargetAssemblyTypeName: Setting_OnBackClick, Assembly-CSharp
-        m_MethodName: OnClick
+      - m_Target: {fileID: 19155374}
+        m_TargetAssemblyTypeName: UI.PauseMenuController, Assembly-CSharp
+        m_MethodName: SettingsMenuClose
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

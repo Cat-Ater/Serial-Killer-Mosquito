@@ -43,7 +43,7 @@ namespace UI.System
             ResetState(true);
 
             if (data.pausePlayer)
-                GameManager.Instance.DisablePlayer = PlayerState.DISABLED;
+                GameManager.Instance.PlayerMovement = PlayerState.DISABLED;
 
             UIManager.PlaySound = data.textOpenSFX;
             animator.SetBool("IsOpen", true);
@@ -83,7 +83,7 @@ namespace UI.System
                     _dialogueState = UI_DialogueState.INACTIVE;
 
                     if (dialogueData.pausePlayer)
-                        GameManager.Instance.DisablePlayer = PlayerState.ENABLED;
+                        GameManager.Instance.PlayerMovement = PlayerState.ENABLED;
 
                     animator.SetBool("IsOpen", false);
                     _caller.DisplayComplete();
