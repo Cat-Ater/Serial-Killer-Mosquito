@@ -16,6 +16,9 @@ public class MainMenu : MonoBehaviour
     public GameObject menuRoot;
     public SettingsMenu settingsMenu;
 
+    public AudioClip openMenuSound; 
+    public AudioClip exitMenuSound;
+
     public bool Open
     {
         get => menuRoot.activeSelf;
@@ -41,6 +44,7 @@ public class MainMenu : MonoBehaviour
         //Disable the main. 
         Open = !(settingsMenu.Open = true);
         menuState = MenuState.SETTINGS_ACTIVE;
+        GameManager.Instance.PlayUISFX(openMenuSound);
     }
 
     public void SettingsMenuClose()
@@ -50,6 +54,7 @@ public class MainMenu : MonoBehaviour
         //Enable the main. 
         Open = !(settingsMenu.Open = false);
         menuState = MenuState.ACTIVE;
+        GameManager.Instance.PlayUISFX(exitMenuSound);
     }
 
     public void QuitGame()

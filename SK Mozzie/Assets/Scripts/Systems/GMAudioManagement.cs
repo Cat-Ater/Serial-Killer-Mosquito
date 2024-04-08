@@ -21,12 +21,9 @@ namespace Audio
 
             public void UpdateVolume(float volume)
             {
-                if(BGM.Count > 0)
+                foreach (GameBGM item in BGM)
                 {
-                    foreach (GameBGM item in BGM)
-                    {
-                        item.AdjustMaxVolume(volume);
-                    }
+                    item.AdjustMaxVolume(volume);
                 }
             }
 
@@ -251,13 +248,13 @@ namespace Audio
         public void SetBGMVolume(float value)
         {
             _gameSettingsData.volumeBGM = value;
-            settingsChanged = true;
+            _bgmHandler.UpdateVolume(_gameSettingsData.volumeBGM);
         }
 
         public void SetSFXVolume(float value)
         {
             _gameSettingsData.volumeSFX = value;
-            settingsChanged = true;
+            _gameSFXSys.UpdateVolume(_gameSettingsData.volumeSFX);
         }
 
         public float GetBGMVolume()
@@ -268,12 +265,6 @@ namespace Audio
         public float GetSFXVolume()
         {
             return _gameSettingsData.volumeSFX;
-        }
-
-        public void SetNarrationVolume(float value)
-        {
-            _gameSettingsData.volumeNarration = value;
-            settingsChanged = true;
         }
 
         public void PlaySFXSoundAt(Vector3 position, AudioClip clip, SFX_Data data)
@@ -289,15 +280,6 @@ namespace Audio
         public void AddBGM(GameBGM bgm)
         {
             _bgmHandler.AddBGM(bgm);
-        }
-
-        public void Update()
-        {
-            if (settingsChanged)
-            {
-                _bgmHandler.UpdateVolume(_gameSettingsData.volumeBGM);
-                _gameSFXSys.UpdateVolume(_gameSettingsData.volumeSFX);
-            }
         }
 
         public void ClearBGM() => _bgmHandler.ClearBGM();
