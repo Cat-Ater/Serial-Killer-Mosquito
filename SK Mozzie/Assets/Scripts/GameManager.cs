@@ -64,9 +64,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
-            UIManager.Instance.PauseMenuToggle();
-
         if (UIManager.Instance == null || playerC == null)
             return;
 
@@ -183,6 +180,10 @@ public class GameManager : MonoBehaviour
     {
         audioManager.PlayUISFX(clip);
     }
+
+    public float GetBGMVolume() => audioManager.GetBGMVolume(); 
+
+    public float GetSFXVolume() => audioManager.GetSFXVolume(); 
 
     public void SetVolumeLevels(float sfxVolume, float BGMVolume)
     {

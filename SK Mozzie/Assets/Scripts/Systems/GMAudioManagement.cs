@@ -248,6 +248,16 @@ namespace Audio
             _bgmHandler = new Audio_BGMHandler();
         }
 
+        public float GetBGMVolume()
+        {
+            return _gameSettingsData.volumeBGM;
+        }
+
+        public float GetSFXVolume()
+        {
+            return _gameSettingsData.volumeSFX;
+        }
+
         public void SetBGMVolume(float value)
         {
             _gameSettingsData.volumeBGM = value;
