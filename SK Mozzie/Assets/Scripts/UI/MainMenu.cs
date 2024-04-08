@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Class responsible for handling the main menu. 
+/// </summary>
 public class MainMenu : MonoBehaviour
 {
     private enum MenuState

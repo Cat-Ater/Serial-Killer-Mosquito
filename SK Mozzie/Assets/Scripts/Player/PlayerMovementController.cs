@@ -3,56 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AxialRotClamp
-{
-    public float turnSpeed = 6.3F;
-    public float Min { get; set; }
-    public float Max { get; set; }
-    public float Current { get; set; }
-
-    public void UpdateLooped(float dt)
-    {
-        Current += dt;
-
-        if (Current > Max)
-            Current = Min;
-        if (Current < Min)
-            Current = Max;
-    }
-
-    public void UpdateClamp(float dt)
-    {
-        Current = Mathf.Clamp(Current + dt, Min, Max);
-    }
-}
-
-[System.Serializable]
-public class KeyPressMonitor
-{
-    public KeyCode key;
-    public bool active = false;
-    public float heldTime = 0;
-    public float maxHeldTime = 0;
-
-    public void Update()
-    {
-        if (Input.GetKey(key) && !active)
-        {
-            active = true;
-        }
-        else if (Input.GetKey(key) == false && active)
-        {
-            active = false;
-            heldTime = 0;
-        }
-
-        if (active && heldTime < maxHeldTime)
-        {
-            heldTime = Mathf.Clamp(heldTime + Time.deltaTime, 0, maxHeldTime);
-        }
-    }
-}
-
+/// <summary>
+/// Controller used for managing the players movement. 
+/// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementController : MonoBehaviour
 {
@@ -89,13 +42,9 @@ public class PlayerMovementController : MonoBehaviour
 
     public void LUpdate()
     {
-        clampX.UpdateLooped(Input.GetAxis("Mouse X") * clampX.turnSpeed);
-        clampY.UpdateClamp(-Input.GetAxis("Mouse Y") * clampY.turnSpeed);
-
         UpdateMovement();
         UpdateRotation();
         UpdateCamera();
-
     }
 
     internal void UpdateVolume()
@@ -137,6 +86,9 @@ public class PlayerMovementController : MonoBehaviour
         if (PlayerController.state == PlayerState.DISABLED)
             return;
 
+        clampX.UpdateLooped(Input.GetAxis("Mouse X") * clampX.turnSpeed);
+        clampY.UpdateClamp(-Input.GetAxis("Mouse Y") * clampY.turnSpeed);
+
         //Update rotation and camera positions. 
         gameObject.transform.rotation = Quaternion.identity * Quaternion.Euler(clampY.Current, clampX.Current, 0);
     }
@@ -145,6 +97,9 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (PlayerController.state == PlayerState.DISABLED)
             return;
+
+        clampX.UpdateLooped(Input.GetAxis("Mouse X") * clampX.turnSpeed);
+        clampY.UpdateClamp(-Input.GetAxis("Mouse Y") * clampY.turnSpeed);
 
         //thirdPerson.transform.position = transform.position + cameraOffset;
         thirdPerson.transform.rotation = transform.rotation;

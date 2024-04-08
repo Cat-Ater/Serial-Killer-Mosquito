@@ -96,6 +96,17 @@ namespace UI
             maxHealthOutput.Setup();
         }
 
+        private void Update()
+        {
+            TargetDataStruct tData = GameManager.Instance.CurrentTargetData;
+            CurrentTargetState tState = GameManager.Instance.currentTargetState;
+            if (GameManager.Instance.TargetSet && GameManager.Instance.TargetEnabled)
+            {
+                InitData(ref tData);
+                UpdateData(tState.idle, tState.attacked, tState.dead);
+            }
+        }
+
         #region  Base System stuff. 
         internal void InitData(ref TargetDataStruct data)
         {

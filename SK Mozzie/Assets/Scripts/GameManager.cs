@@ -5,6 +5,18 @@ using UnityEngine.SceneManagement;
 using Audio;
 using Unity.Mathematics;
 
+public struct CurrentTargetState
+{
+    public bool idle, attacked, dead;
+
+    public CurrentTargetState(bool idle, bool attacked, bool dead)
+    {
+        this.idle = idle;
+        this.attacked = attacked;
+        this.dead = dead;
+    }
+}
+
 [System.Serializable]
 public class CameraData
 {
@@ -39,6 +51,14 @@ public class GameManager : MonoBehaviour
     public Vector3 PlayerPosition { get => playerC.Position; }
     public PlayerState PlayerMovement { set => Instance.playerC.SetPlayerState = value; }
 
+    public bool TargetSet => Targets[targetDataIndex].active;
+
+    public bool TargetEnabled { get; set; } = false;
+
+    public TargetDataStruct CurrentTargetData => Targets[targetDataIndex].targetData.tData;
+
+    public CurrentTargetState currentTargetState => Targets[targetDataIndex].GetState();
+
     #endregion
 
     public void OnEnable()
@@ -69,11 +89,6 @@ public class GameManager : MonoBehaviour
             return;
 
         UpdateWorldRadius();
-
-        if (Targets[targetDataIndex].active)
-        {
-            UIManager.Instance._targetDisplay.InitData(ref Targets[targetDataIndex].targetData.tData);
-        }
 
         if (PlayerIntroComplete == true)
         {
@@ -116,6 +131,7 @@ public class GameManager : MonoBehaviour
     {
         targetDataIndex = 0;
         Targets[targetDataIndex].SetActive();
+        TargetEnabled = true;
     }
 
     public void SetNextTarget()

@@ -21,4 +21,9 @@ public class TargetController : MonoBehaviour
             GameManager.Instance.SetNextTarget();
         }
     }
+
+    public CurrentTargetState GetState()
+    {
+        return new CurrentTargetState(targetData.playIdleAnim, targetData.playAttackAnim, targetData.playDeathAnim);
+    }
 }
