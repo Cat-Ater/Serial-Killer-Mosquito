@@ -260,6 +260,16 @@ namespace Audio
             settingsChanged = true;
         }
 
+        public float GetBGMVolume()
+        {
+            return _gameSettingsData.volumeBGM;
+        }
+
+        public float GetSFXVolume()
+        {
+            return _gameSettingsData.volumeSFX;
+        }
+
         public void SetNarrationVolume(float value)
         {
             _gameSettingsData.volumeNarration = value;

@@ -4,6 +4,6 @@ public class DeactivatePauseMenu : MonoBehaviour
 {
     public void Deactivate()
     {
-        UIManager.Instance.PauseMenuToggle();
+        UIManager.Instance.ClosePauseMenu();
     }
 }

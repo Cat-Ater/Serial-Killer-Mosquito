@@ -7,6 +7,6 @@ public class Setting_OnBackClick : MonoBehaviour
 
     public void OnClick()
     {
-        UIManager.Instance.settingsMenu.ClosePauseMenu();
+        UIManager.Instance.CloseSettingsMenu();
     }
 }

@@ -64,8 +64,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
-            UIManager.Instance.PauseMenuToggle();
 
         if (UIManager.Instance == null || playerC == null)
             return;
@@ -172,6 +170,16 @@ public class GameManager : MonoBehaviour
     public GameBGM AddBGM
     {
         set => audioManager.AddBGM(value);
+    }
+
+    public float GetBGMVolume()
+    {
+        return audioManager.GetBGMVolume();
+    }
+
+    public float GetSFXVolume()
+    {
+        return audioManager.GetSFXVolume();
     }
 
     public void PlaySoundFXAt(Vector3 position, AudioClip clip, SFX_Data data)
