@@ -93,6 +93,6 @@ public class UIManager : MonoBehaviour
 
     #region Target Data display. 
     public void SetTargetData(bool idle, bool attacked, bool dead) =>
-        _targetDisplay.UpdateData(idle, attacked, dead);
+        _targetDisplay.UpdateState(idle, attacked, dead);
     #endregion
 }

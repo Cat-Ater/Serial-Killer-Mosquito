@@ -58,7 +58,7 @@ public class TargetData : MonoBehaviour
         {
             if(UIManager.Instance._targetDisplay.data.index != tData.index)
             {
-                UIManager.Instance._targetDisplay.InitData(ref tData);
+                UIManager.Instance._targetDisplay.UpdateData(ref tData);
             }
             if (targetHealth.state == TargetHealthState.ATTACKED)
             {

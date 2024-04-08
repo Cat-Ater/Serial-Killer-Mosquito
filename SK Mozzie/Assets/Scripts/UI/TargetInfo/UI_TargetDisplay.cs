@@ -102,19 +102,19 @@ namespace UI
             TargetState tState = GameManager.Instance.TargetManager.CTargetState;
             if (GameManager.Instance.TargetManager.systemActive && GameManager.Instance.TargetManager.TargetEnabled)
             {
-                InitData(ref tData);
-                UpdateData(tState.idle, tState.attacked, tState.dead);
+                UpdateData(ref tData);
+                UpdateState(tState.idle, tState.attacked, tState.dead);
             }
         }
 
         #region  Base System stuff. 
-        internal void InitData(ref TargetDataStruct data)
+        internal void UpdateData(ref TargetDataStruct data)
         {
             this.data = data;
             OnIdle();
         }
 
-        internal void UpdateData(bool idle, bool attacked, bool dead)
+        internal void UpdateState(bool idle, bool attacked, bool dead)
         {
             UpdateUI();
             if (idle)
@@ -140,7 +140,10 @@ namespace UI
             //Do general UI updates here. 
             nameOutput.SetText = data.name;
             targetNumberOutput.SetText = data.index.ToString();
-            currentHealthOutput.SetText = data.healthCurrent.ToString();
+
+            string cHealthArr = ((int)(data.healthCurrent)).ToString();
+
+            currentHealthOutput.SetText = cHealthArr;
             maxHealthOutput.SetText = data.healthMax.ToString();
         }
 
