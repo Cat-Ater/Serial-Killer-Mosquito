@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     GMAudioManagement audioManager;
     public PlayerController playerC;
     public CameraData[] cameraData;
-    private TargetManager _targetManager;
+    public TargetManager _targetManager;
     public PlayerRaidalDistance playerRaidusWorld;
     public bool PlayerIntroComplete = false;
 
@@ -77,7 +77,17 @@ public class GameManager : MonoBehaviour
             _targetManager.InitalizeSystem();
         }
 
-        TargetManager.Update(); 
+        TargetManager.Update();
+
+        if (_targetManager.AllTargetsDead())
+        {
+            Debug.Log("Game Completed");
+            //Resolve game complete. 
+            Destroy(UIManager.Instance.gameObject);
+            
+            GameManager.Instance.LoadLevel("GameOver");
+            Destroy(GameManager.Instance.gameObject);
+        }
     }
 
     #region Level Loading. 

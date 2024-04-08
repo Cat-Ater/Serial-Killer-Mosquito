@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class TargetManager
 {
     public List<TargetController> targets;
@@ -12,7 +13,7 @@ public class TargetManager
     public bool TargetEnabled => targets[index].active;
     public TargetDataStruct TargetData => targets[index].targetData.tData;
     public TargetState CTargetState => targets[index].GetState();
-
+    public bool AllDead => index >= targets.Count;
     public void Update()
     {
         if (CTargetState.dead == true)
@@ -42,15 +43,21 @@ public class TargetManager
     {
         targets[index].active = false;
         index++;
-        if (index >= targets.Count)
-        {
-            Debug.Log("Game Completed");
-            //Resolve game complete. 
-            GameManager.Instance.LoadLevel("GameOver");
-        }
-        else
+        if (index < targets.Count)
         {
             targets[index].SetActive();
         }
+    }
+
+    public bool AllTargetsDead()
+    {
+
+        foreach (TargetController controller in targets)
+        {
+            if (controller.targetData.HealthCurrent > 0)
+                return false;
+        }
+
+        return true;
     }
 }

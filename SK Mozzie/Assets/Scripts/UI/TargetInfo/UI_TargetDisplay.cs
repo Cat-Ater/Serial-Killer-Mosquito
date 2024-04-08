@@ -77,11 +77,6 @@ namespace UI
     {
         public TargetDataStruct data;
 
-        string targetName; // The name of the target. 
-        int targetIndex; // The index of the target (Imagine this as the target number in a list). 
-        float currentHealth; // The current health of the player. 
-        float healthMax; //The maximum health of the player.
-
         public GameObject rootObject;
         public UIElement nameOutput;
         public UIElement targetNumberOutput;
@@ -139,7 +134,7 @@ namespace UI
         {
             //Do general UI updates here. 
             nameOutput.SetText = data.name;
-            targetNumberOutput.SetText = data.index.ToString();
+            targetNumberOutput.SetText = (data.index + 1).ToString();
 
             string cHealthArr = ((int)(data.healthCurrent)).ToString();
 
