@@ -5,18 +5,6 @@ using UnityEngine.SceneManagement;
 using Audio;
 using Unity.Mathematics;
 
-public struct TargetState
-{
-    public bool idle, attacked, dead;
-
-    public TargetState(bool idle, bool attacked, bool dead)
-    {
-        this.idle = idle;
-        this.attacked = attacked;
-        this.dead = dead;
-    }
-}
-
 [System.Serializable]
 public class CameraData
 {
@@ -27,54 +15,6 @@ public class CameraData
     public void Match(string name)
     {
         camera.enabled = (this.name == name);
-    }
-}
-
-public class TargetManager
-{
-    public List<TargetController> targets;
-    public int index = 0;
-    public bool systemActive;
-    public bool targetSelected;
-
-    public bool CanDisplayTarget => systemActive && targetSelected;
-    public bool TargetEnabled => targets[index].active;
-    public TargetDataStruct TargetData => targets[index].targetData.tData;
-    public TargetState CTargetState => targets[index].GetState();
-
-    public void SetTargets(List<TargetController> targetList)
-    {
-        this.targets = targetList;
-    }
-
-    public void InitalizeSystem()
-    {
-        if (targets != null)
-        {
-            index = 0;
-            targets[index].SetActive();
-            systemActive = true;
-        }
-        else
-        {
-            Debug.Log("No Target Data found.");
-        }
-    }
-
-    public void SelectNext()
-    {
-        targets[index].active = false;
-        index++;
-        if (index >= targets.Count)
-        {
-            Debug.Log("Game Completed");
-            //Resolve game complete. 
-            GameManager.Instance.LoadLevel("GameOver");
-        }
-        else
-        {
-            targets[index].SetActive();
-        }
     }
 }
 
@@ -137,10 +77,7 @@ public class GameManager : MonoBehaviour
             _targetManager.InitalizeSystem();
         }
 
-        if(TargetManager.CTargetState.dead == true)
-        {
-            TargetManager.SelectNext(); 
-        }
+        TargetManager.Update(); 
     }
 
     #region Level Loading. 
