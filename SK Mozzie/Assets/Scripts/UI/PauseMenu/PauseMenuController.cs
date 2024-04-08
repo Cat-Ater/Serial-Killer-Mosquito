@@ -3,50 +3,110 @@ using UnityEngine;
 
 namespace UI
 {
+
     public class PauseMenuController : MonoBehaviour
     {
+        private enum MenuState
+        {
+            INACTIVE,
+            ACTIVE,
+            SETTINGS_ACTIVE
+        }
+
+        private MenuState menuState = MenuState.INACTIVE;
         private const float TIME_DELAY = 0.05F;
         bool canSwitch = true;
         public GameObject menuRoot;
+        public SettingsMenu settingsMenu;
 
-        private bool OpenState
+        public bool Open
         {
             get => menuRoot.activeSelf;
-            set => menuRoot.SetActive(value);
+            private set => menuRoot.SetActive(value);
         }
 
         void Start()
         {
-            OpenState = false;
-            menuRoot.SetActive(OpenState);
+            Open = false;
+            menuRoot.SetActive(Open);
         }
 
-        public void TooggleState()
+        private void Update()
         {
-            if (!canSwitch)
-                return;
-            OpenState = !OpenState;
-            Debug.Log("Openstate: " + OpenState);
-            if (OpenState)
+            switch (menuState)
             {
-                Time.timeScale = 0.1f;
-                GameManager.Instance.DisablePlayer = PlayerState.DISABLED;
+                case MenuState.INACTIVE:
+                    State_Inactive();
+                    break;
+                case MenuState.ACTIVE:
+                    State_Active();
+                    break;
+                case MenuState.SETTINGS_ACTIVE:
+                    State_Settings();
+                    break;
             }
-            else
-            {
-                Time.timeScale = 1;
-                GameManager.Instance.DisablePlayer = PlayerState.ENABLED; 
-            }
-
-            menuRoot.SetActive(OpenState);
-            canSwitch = false;
-            StartCoroutine(TimerDelay());
         }
 
         IEnumerator TimerDelay()
         {
             yield return new WaitForSeconds(TIME_DELAY);
             canSwitch = true;
+        }
+
+        public void State_Inactive()
+        {
+            if (canSwitch && Input.GetKey(KeyCode.Escape))
+                UpdateMenuState(MenuState.ACTIVE);
+        }
+
+        private void UpdateMenuState(MenuState state)
+        {
+            //Update the game time rate and player state. 
+            Time.timeScale = (Open) ? 0.1F : 1F;
+            GameManager.Instance.DisablePlayer = (Open) ? PlayerState.DISABLED : PlayerState.ENABLED;
+
+            //Update open state.
+            Open = !Open;
+
+            //Update the menu state. 
+            menuState = state;
+
+            //Start Delay. 
+            canSwitch = false;
+            StartCoroutine(TimerDelay());
+        }
+
+        public void State_Active()
+        {
+
+        }
+
+        public void State_Settings()
+        {
+
+        }
+
+        public void SettingsMenuOpen()
+        {
+            settingsMenu.PopulateData();
+
+            //Disable the main. 
+            Open = !(settingsMenu.Open = true);
+            menuState = MenuState.SETTINGS_ACTIVE;
+        }
+
+        public void SettingsMenuClose()
+        {
+            settingsMenu.PushData();
+
+            //Enable the main. 
+            Open = !(settingsMenu.Open = false);
+            menuState = MenuState.ACTIVE;
+        }
+
+        public void MenuClose()
+        {
+            UpdateMenuState(MenuState.INACTIVE);
         }
     }
 }

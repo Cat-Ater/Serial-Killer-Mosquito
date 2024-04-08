@@ -82,13 +82,13 @@ public class UIManager : MonoBehaviour
 
     #region Pause Menu. 
     public void ClosePauseMenu() =>
-        _pauseMenuController.ClosePauseMenu();
+        _pauseMenuController.MenuClose();
 
     public void CloseSettingsMenu() =>
-        _pauseMenuController.CloseSettingsMenu();
+        _pauseMenuController.SettingsMenuClose();
 
     public void OpenSettingsMenu() =>
-        _pauseMenuController.OpenSettingsMenu();
+        _pauseMenuController.SettingsMenuOpen();
     #endregion
 
     #region Target Data display. 
